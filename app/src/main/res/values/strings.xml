@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MvpFrame</string>
+    <string name="log_name">MvpFrame</string>
+
+    <string name="login_name_hint">输入用户名</string>
+    <string name="login_pwd_hint">输入密码</string>
+    <string name="login_btn_txt">登录</string>
+
+    <string name="app_loading">加载中</string>
 </resources>
