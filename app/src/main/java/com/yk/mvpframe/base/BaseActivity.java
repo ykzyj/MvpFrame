@@ -5,9 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
-import com.yk.mvpframe.Util.ToastUtils;
+import com.yk.mvpframe.util.ToastUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -53,10 +52,12 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         }
     }
 
+    @Override
     public void showToast(String s) {
         ToastUtils.show(s);
     }
 
+    @Override
     public void showToast(int resId) {
         ToastUtils.show(resId);
     }

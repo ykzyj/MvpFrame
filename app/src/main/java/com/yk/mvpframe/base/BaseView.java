@@ -9,6 +9,11 @@ package com.yk.mvpframe.base;
  **/
 public interface BaseView {
     /**
+     * 显示Toast
+     */
+    void showToast(String s);
+    void showToast(int resId);
+    /**
      * 显示dialog
      */
     void showLoading();

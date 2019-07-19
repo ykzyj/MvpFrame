@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SuperEdit">
+        <attr name="default_color" format="color"></attr>
+        <attr name="focus_color" format="color"></attr>
+        <attr name="forbid_color" format="color"></attr>
+        <attr name="is_pw_input" format = "boolean"></attr>
+        <attr name="input_max_length" format="integer"></attr>
+        <attr name="title_name" format="string"></attr>
+        <attr name="hint_txt" format="string"></attr>
+        <attr name="title_img" format="reference"></attr>
+    </declare-styleable>
+</resources>

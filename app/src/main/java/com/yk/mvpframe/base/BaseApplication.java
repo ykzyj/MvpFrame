@@ -8,7 +8,7 @@ import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 import com.squareup.leakcanary.LeakCanary;
 import com.yk.mvpframe.R;
-import com.yk.mvpframe.Util.ToastUtils;
+import com.yk.mvpframe.util.ToastUtils;
 import com.yk.mvpframe.consts.Consts;
 
 /**

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00FFFFFF" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/frame_dialog_bg"
+        >
+
+        <TextView
+            android:id="@+id/dg_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="标题"
+            android:paddingTop="15dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:visibility="gone"
+            />
+
+        <View
+            android:id="@+id/divider_view"
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:layout_below="@+id/dg_title_tv"
+            android:background="@color/colorPrimary"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/dg_content_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:paddingTop="25dp"
+            android:paddingBottom="20dp"
+            android:textSize="18sp"
+            android:textColor="@color/colorBlack4F"
+            android:gravity="center"
+            android:text="内容"
+            android:layout_below="@+id/divider_view"
+            />
+
+        <LinearLayout
+            android:id="@+id/lin_content_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/dg_content_tv"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            >
+
+            <Button
+                android:id="@+id/ok_btn"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="@string/app_ok"
+                android:background="@drawable/btn_dialog_ok_selector"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="18sp"
+                android:textColor="@color/colorWhite"
+                android:visibility="gone"
+                />
+
+            <Button
+                android:id="@+id/cancel_btn"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="@string/app_cancel"
+                android:background="@drawable/btn_dialog_cancel_selector"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

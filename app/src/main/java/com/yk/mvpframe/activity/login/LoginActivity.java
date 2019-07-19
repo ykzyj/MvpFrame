@@ -2,9 +2,12 @@ package com.yk.mvpframe.activity.login;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+
 import com.yk.mvpframe.R;
 import com.yk.mvpframe.base.BaseActivity;
+import com.yk.mvpframe.widget.CustomDialog;
+import com.yk.mvpframe.widget.SuperEditText;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -16,10 +19,11 @@ import butterknife.OnClick;
  * @Mark
  **/
 public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginView {
-    @BindView(R.id.login_name_et)
-    EditText loginNameEt;
-    @BindView(R.id.login_pwd_et)
-    EditText loginPwdEt;
+
+    @BindView(R.id.login_name_set)
+    SuperEditText loginNameSet;
+    @BindView(R.id.login_pw_set)
+    SuperEditText loginPwSet;
     @BindView(R.id.login_btn)
     Button loginBtn;
 
@@ -42,7 +46,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.login_btn:
-                presenter.login(loginNameEt.getText().toString(),loginPwdEt.getText().toString());
+                presenter.login(loginNameSet.getText(),loginPwSet.getText());
                 break;
         }
     }

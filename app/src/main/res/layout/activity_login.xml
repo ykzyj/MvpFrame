@@ -3,31 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.main.MainActivity">
+    android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/login_name_et"
+    <com.yk.mvpframe.widget.SuperEditText
+        android:id="@+id/login_name_set"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:hint="@string/login_name_hint"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:input_max_length="20"
+        app:title_name="账号"
+        app:hint_txt="@string/login_name_hint"
+        app:title_img="@mipmap/frame_account"
         />
 
-    <EditText
-        android:id="@+id/login_pwd_et"
+    <com.yk.mvpframe.widget.SuperEditText
+        android:id="@+id/login_pw_set"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/login_name_et"
-        android:hint="@string/login_pwd_hint"
+        android:layout_height="80dp"
+        app:layout_constraintTop_toBottomOf="@+id/login_name_set"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:input_max_length="20"
+        app:is_pw_input="true"
+        app:title_name="密码"
+        app:hint_txt="@string/login_pwd_hint"
+        app:title_img="@mipmap/frame_pw"
         />
 
     <Button
         android:id="@+id/login_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/login_pwd_et"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@+id/login_pw_set"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:text="@string/login_btn_txt"
+        android:textSize="20sp"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/btn_common_selector"
         />
 
 </android.support.constraint.ConstraintLayout>
