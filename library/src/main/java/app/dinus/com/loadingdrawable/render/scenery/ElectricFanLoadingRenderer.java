@@ -120,7 +120,7 @@ public class ElectricFanLoadingRenderer extends LoadingRenderer {
     private Drawable mLoadingDrawable;
     private Drawable mElectricFanDrawable;
 
-    private ElectricFanLoadingRenderer(Context context) {
+    public ElectricFanLoadingRenderer(Context context) {
         super(context);
         init(context);
         setupPaint();

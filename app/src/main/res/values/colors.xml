@@ -7,6 +7,7 @@
     <color name="colorGrey">#cccccc</color>
     <color name="colorBlack4F">#4F4F4F</color>
 
+    <color name="loading_dialog_bg">#ffe6ebed</color>
     <color name="edit_default_color">#6E6E6E</color>
     <color name="edit_forbid_color">#CD2626</color>
 

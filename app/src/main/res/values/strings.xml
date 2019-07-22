@@ -6,7 +6,8 @@
     <string name="login_pwd_hint">请输入密码</string>
     <string name="login_btn_txt">登录</string>
 
-    <string name="app_loading">加载中</string>
+    <string name="app_download">下载</string>
+    <string name="app_loading">加载中...</string>
     <string name="app_success">请求成功</string>
     <string name="app_error">请求错误</string>
     <string name="app_ok">确认</string>

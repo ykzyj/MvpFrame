@@ -17,6 +17,7 @@ public interface BaseView {
      * 显示dialog
      */
     void showLoading();
+    void showLoading(String loadingTxt);
 
     /**
      * 显示下载文件dialog
@@ -33,7 +34,7 @@ public interface BaseView {
     /**
      * 下载进度
      */
-    void onProgress(long totalSize, long downSize);
+    void onProgress(int progress);
 
     /**
      * 隐藏 dialog

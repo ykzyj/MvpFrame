@@ -1,11 +1,11 @@
 package com.yk.mvpframe.activity.login;
 
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 
 import com.yk.mvpframe.R;
 import com.yk.mvpframe.base.BaseActivity;
-import com.yk.mvpframe.widget.CustomDialog;
 import com.yk.mvpframe.widget.SuperEditText;
 
 import butterknife.BindView;

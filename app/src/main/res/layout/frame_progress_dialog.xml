@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#00FFFFFF">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/frame_dialog_bg"
+        >
+
+        <TextView
+            android:id="@+id/dg_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/app_download"
+            android:paddingTop="15dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            />
+
+        <View
+            android:id="@+id/divider_view"
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:layout_below="@+id/dg_title_tv"
+            android:background="@color/colorPrimary"
+            />
+
+        <com.yk.mvpframe.widget.HorizontalProgressBarWithNumber
+            android:id="@+id/progress_pb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:progress="0"
+            app:progress_reached_bar_height="20dp"
+            app:progress_text_size="18sp"
+            app:progress_text_color="@color/colorPrimary"
+            app:progress_unreached_color="@color/colorGrey"
+            android:layout_below="@+id/divider_view"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            />
+        
+        <TextView
+            android:id="@+id/cancel_tv"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/progress_pb"
+            android:background="@drawable/btn_dialog_progress_cancel_selector"
+            android:text="@string/app_cancel"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/colorWhite"
+            />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

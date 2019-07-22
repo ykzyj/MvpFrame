@@ -1,12 +1,14 @@
 package com.yk.mvpframe.base;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 
 import com.yk.mvpframe.util.ToastUtils;
+import com.yk.mvpframe.widget.LoadingDialog;
+import com.yk.mvpframe.widget.ProgressDialog;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -20,7 +22,8 @@ import butterknife.Unbinder;
  **/
 public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BaseView {
     public Context context;
-    private ProgressDialog dialog;
+    private ProgressDialog mDialog;
+    private LoadingDialog mLoadingDialog;
     protected T presenter;
     protected Unbinder unbinder;
 
@@ -63,38 +66,48 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     }
 
     public void showFileDialog() {
-        dialog = new ProgressDialog(context);
-        dialog.setMessage("正在下载中,请稍后");
-        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setMax(100);
-        dialog.show();
+        if(mDialog==null){
+            mDialog = new ProgressDialog(context);
+            mDialog.setCanceledOnTouchOutside(false);
+        }
+        else {
+            mDialog.setProgress(0);
+        }
+        mDialog.show();
     }
 
     public void hideFileDialog() {
-        if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
         }
     }
 
 
     private void closeLoadingDialog() {
-        if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
+            mLoadingDialog.dismiss();
         }
     }
 
-    private void showLoadingDialog() {
-        if (dialog == null) {
-            dialog = new ProgressDialog(context);
+    private void showLoadingDialog(String loadingTxt) {
+        if (mLoadingDialog == null) {
+            mLoadingDialog = new LoadingDialog(context);
         }
-        dialog.setCancelable(false);
-        dialog.show();
+        if(!TextUtils.isEmpty(loadingTxt)){
+            mLoadingDialog.setLoadingTxt(loadingTxt);
+        }
+        mLoadingDialog.setCancelable(false);
+        mLoadingDialog.show();
     }
 
     @Override
     public void showLoading() {
-        showLoadingDialog();
+        showLoadingDialog("");
+    }
+
+    @Override
+    public void showLoading(String loadingTxt) {
+        showLoadingDialog(loadingTxt);
     }
 
     @Override
@@ -123,9 +136,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     }
 
     @Override
-    public void onProgress(long totalSize, long downSize) {
-        if (dialog != null) {
-            dialog.setProgress((int) (downSize * 100 / totalSize));
+    public void onProgress(int progress) {
+        if (mDialog != null) {
+            mDialog.setProgress(progress);
         }
     }
 }
