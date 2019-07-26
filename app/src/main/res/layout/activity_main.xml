@@ -1,18 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.main.MainActivity">
+    android:orientation="vertical"
+    >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/main_vp"
+        >
+    </android.support.v4.view.ViewPager>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/tab_normal_grey"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        >
 
-</android.support.constraint.ConstraintLayout>
+        <com.yk.mvpframe.widget.TabView
+            android:id="@+id/home_tab"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            app:tab_normal_image="@mipmap/home_normal"
+            app:tab_select_image="@mipmap/home_fill"
+            app:tab_text="@string/app_tab_home"
+            />
+
+        <com.yk.mvpframe.widget.TabView
+            android:id="@+id/home_eat"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            app:tab_normal_image="@mipmap/eat_normal"
+            app:tab_select_image="@mipmap/eat_fill"
+            app:tab_text="@string/app_tab_home"
+            />
+
+        <com.yk.mvpframe.widget.TabView
+            android:id="@+id/home_play"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            app:tab_normal_image="@mipmap/play_normal"
+            app:tab_select_image="@mipmap/play_fill"
+            app:tab_text="@string/app_tab_play"
+            />
+
+        <com.yk.mvpframe.widget.TabView
+            android:id="@+id/home_mine"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            app:tab_normal_image="@mipmap/mine_normal"
+            app:tab_select_image="@mipmap/mine_fill"
+            app:tab_text="@string/app_tab_mine"
+            />
+
+    </LinearLayout>
+</LinearLayout>

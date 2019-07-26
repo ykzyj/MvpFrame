@@ -13,5 +13,10 @@
     <string name="app_ok">确认</string>
     <string name="app_cancel">取消</string>
 
+    <string name="app_tab_home">主页</string>
+    <string name="app_tab_eat">吃喝</string>
+    <string name="app_tab_play">玩乐</string>
+    <string name="app_tab_mine">我的</string>
+
     <string name="login_name_or_pw_input">请输入用户名和密码</string>
 </resources>

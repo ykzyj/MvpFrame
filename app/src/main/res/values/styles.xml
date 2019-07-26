@@ -43,7 +43,12 @@
 
     <declare-styleable name="RoundProgressBarWidthNumber">
         <attr name="radius" format="dimension" />
-    </declare-styleable>RoundProgressBarWidthNumber.java
-    HorizontalProgressBarWithNumber.java
+    </declare-styleable>
+
+    <declare-styleable name="TabView">
+        <attr name="tab_select_image" format="reference" />
+        <attr name="tab_normal_image" format="reference" />
+        <attr name="tab_text" format="string" />
+    </declare-styleable>
 
 </resources>

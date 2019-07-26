@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-dontwarn io.rx_cache2.internal.**
+-keepclassmembers enum io.rx_cache2.Source { *; }
+-keepclassmembernames class * { @io.rx_cache2.* <methods>; }

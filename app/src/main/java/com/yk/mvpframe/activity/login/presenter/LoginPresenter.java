@@ -1,13 +1,13 @@
-package com.yk.mvpframe.activity.login;
+package com.yk.mvpframe.activity.login.presenter;
 
 import android.text.TextUtils;
-
 import com.yk.mvpframe.R;
+import com.yk.mvpframe.activity.login.view.LoginView;
 import com.yk.mvpframe.util.AsciiUtils;
 import com.yk.mvpframe.base.BaseObserver;
 import com.yk.mvpframe.base.BasePresenter;
 import com.yk.mvpframe.model.UserInfoModel;
-
+import com.yk.mvpframe.util.CacheUtils;
 
 /**
  * @FileName LoginPresenter
@@ -26,11 +26,13 @@ public class LoginPresenter extends BasePresenter<LoginView> {
             baseView.showToast(R.string.login_name_or_pw_input);
             return;
         }
-        addDisposable(apiServer.login(AsciiUtils.stringEncryption(name) , AsciiUtils.stringEncryption(pwd))
+
+        addDisposable(apiRepository.login(AsciiUtils.stringEncryption(name) , AsciiUtils.stringEncryption(pwd),true)
                 ,new BaseObserver(baseView,true) {
                     @Override
                     public void onSuccess(Object o) {
                         if(o!=null&&o instanceof UserInfoModel){
+                            CacheUtils.setUserInfoModel((UserInfoModel)o);
                             baseView.onLoginSucc();
                         }
                     }
@@ -39,6 +41,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                     public void onError(String msg) {
                         baseView.showError(msg);
                     }
-        });
+                });
+
     }
 }

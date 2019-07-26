@@ -10,5 +10,6 @@
     <color name="loading_dialog_bg">#ffe6ebed</color>
     <color name="edit_default_color">#6E6E6E</color>
     <color name="edit_forbid_color">#CD2626</color>
+    <color name="tab_normal_grey">#ff8a8a8a</color>
 
 </resources>

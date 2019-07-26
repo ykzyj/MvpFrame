@@ -1,4 +1,4 @@
-package com.yk.mvpframe.activity.login;
+package com.yk.mvpframe.activity.login.view;
 
 import com.yk.mvpframe.base.BaseView;
 

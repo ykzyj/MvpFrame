@@ -93,7 +93,7 @@ public class SuperEditText extends RelativeLayout implements CompoundButton.OnCh
         if(!TextUtils.isEmpty(mTitleName)){
             mTitleTv.setText(mTitleName);
         }
-        LayoutParams titleTvParams=new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+        LayoutParams titleTvParams=new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         titleTvParams.addRule(RelativeLayout.CENTER_VERTICAL);
         titleTvParams.setMargins(ConvertUtils.dp2px(marginCount),
@@ -214,6 +214,7 @@ public class SuperEditText extends RelativeLayout implements CompoundButton.OnCh
     private void resetView() {
         if(mAnimateFlag&& TextUtils.isEmpty(mContentEt.getText().toString())){
             mTitleTv.animate().translationYBy(getHeight()/4)
+                    .translationX(ConvertUtils.dp2px(imageW))
                     .scaleX(1.0f).scaleY(1.0f)
                     .setDuration(200);
             mContentEt.setVisibility(INVISIBLE);
@@ -246,6 +247,7 @@ public class SuperEditText extends RelativeLayout implements CompoundButton.OnCh
         if(view.getId()==mTitleTv.getId()){
             if(!mAnimateFlag){
                 mTitleTv.animate().translationYBy(-getHeight()/4)
+                        .translationX(-ConvertUtils.dp2px(imageW))
                         .scaleX(0.85f).scaleY(0.85f)
                         .setDuration(200);
                 mContentEt.setVisibility(VISIBLE);

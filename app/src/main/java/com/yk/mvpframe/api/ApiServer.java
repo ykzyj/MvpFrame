@@ -16,9 +16,6 @@ import retrofit2.http.POST;
  * @Mark
  **/
 public interface ApiServer {
-     /*@GET(Consts.Login)
-    Call<UserInfoModel> login(@Query("phone") String phone, @Query("password") String password);*/
-
     @POST(Consts.Login)
     @FormUrlEncoded
     Observable<UserInfoModel> login(@Field("phone") String phone, @Field("password") String password);

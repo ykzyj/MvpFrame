@@ -1,9 +1,13 @@
 package com.yk.mvpframe.api;
 
+import android.text.TextUtils;
+
+import com.blankj.utilcode.util.SPUtils;
 import com.orhanobut.logger.Logger;
 import com.yk.mvpframe.base.gson.BaseConverterFactory;
 import com.yk.mvpframe.consts.Consts;
 import com.yk.mvpframe.helper.HttpUrlHelper;
+import com.yk.mvpframe.util.CacheUtils;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -42,9 +46,18 @@ public class ApiRetrofit {
     private Interceptor interceptor = new Interceptor() {
         @Override
         public Response intercept(Chain chain) throws IOException {
-            Request request = chain.request();
+            Request original  = chain.request();
+            Request.Builder requestBuilder = original .newBuilder()
+                    .header("token", TextUtils.isEmpty(CacheUtils.getToken())?"":CacheUtils.getToken());
+            Request request = requestBuilder.build();
             long startTime = System.currentTimeMillis();
-            Response response = chain.proceed(chain.request());
+            Response response = chain.proceed(request);
+            String token=response.header("token");
+            if(!TextUtils.isEmpty(token)){
+                CacheUtils.setToken(token);
+                SPUtils spUtils=SPUtils.getInstance();
+                spUtils.put("token",token);
+            }
             long endTime = System.currentTimeMillis();
             long duration = endTime - startTime;
             MediaType mediaType = response.body().contentType();
@@ -80,12 +93,12 @@ public class ApiRetrofit {
         apiServer = retrofit.create(ApiServer.class);
     }
 
-    public HttpUrlHelper getHttpUrlHelper() {
-        return httpUrlHelper;
-    }
-
-    public void setHttpUrlHelper(HttpUrlHelper httpUrlHelper) {
-        this.httpUrlHelper = httpUrlHelper;
+    /**
+     *
+     * @param host 不能包括协议头（http://或https://），只替换base地址
+     */
+    public void setHttpBaseUrl(String host) {
+        this.httpUrlHelper.setHost(host);
     }
 
     /**

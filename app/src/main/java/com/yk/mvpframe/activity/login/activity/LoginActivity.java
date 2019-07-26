@@ -1,15 +1,17 @@
-package com.yk.mvpframe.activity.login;
+package com.yk.mvpframe.activity.login.activity;
 
-import android.os.Handler;
-import android.view.View;
 import android.widget.Button;
-
+import com.jakewharton.rxbinding3.view.RxView;
 import com.yk.mvpframe.R;
+import com.yk.mvpframe.activity.login.presenter.LoginPresenter;
+import com.yk.mvpframe.activity.login.view.LoginView;
+import com.yk.mvpframe.activity.main.activity.MainActivity;
 import com.yk.mvpframe.base.BaseActivity;
 import com.yk.mvpframe.widget.SuperEditText;
-
+import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
-import butterknife.OnClick;
+import io.reactivex.functions.Consumer;
+import kotlin.Unit;
 
 /**
  * @FileName LoginActivity
@@ -39,15 +41,13 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     public void onLoginSucc() {
-        showToast("成功");
+        MainActivity.startMainActivity(LoginActivity.this);
     }
 
-    @OnClick(R.id.login_btn)
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.login_btn:
-                presenter.login(loginNameSet.getText(),loginPwSet.getText());
-                break;
-        }
+    @Override
+    protected void initView() {
+        presenter.addDisposable(RxView.clicks(loginBtn)
+                .throttleFirst(500,TimeUnit.MILLISECONDS)
+                .subscribe(o -> presenter.login(loginNameSet.getText(),loginPwSet.getText())));
     }
 }

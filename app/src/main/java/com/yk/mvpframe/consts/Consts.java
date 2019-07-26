@@ -6,6 +6,12 @@ public class Consts {
      * 设置当前app是否打印log信息
      */
     public static final boolean DEBUG = true;
+
+    /**
+     * 静态变量
+     */
+    public static final String BUNDLE_KEY_TAB_TITLE="key_tab_title";
+
     /**
      * 服务器地址
      */

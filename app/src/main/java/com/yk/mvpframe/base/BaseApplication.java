@@ -1,6 +1,7 @@
 package com.yk.mvpframe.base;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
@@ -19,9 +20,13 @@ import com.yk.mvpframe.consts.Consts;
  * @Mark
  **/
 public class BaseApplication extends Application {
+
+    private static BaseApplication application;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        application=this;
         if(Consts.DEBUG){
             if (LeakCanary.isInAnalyzerProcess(this)) {
                 // This process is dedicated to LeakCanary for heap analysis.
@@ -45,5 +50,9 @@ public class BaseApplication extends Application {
                 return Consts.DEBUG;
             }
         });
+    }
+
+    public static Context getApplication(){
+        return application;
     }
 }
