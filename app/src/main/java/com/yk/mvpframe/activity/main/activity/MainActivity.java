@@ -9,29 +9,42 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
 import android.view.ViewGroup;
-import android.widget.Button;
 
+import com.gyf.immersionbar.ImmersionBar;
+import com.jakewharton.rxbinding3.view.RxView;
 import com.orhanobut.logger.Logger;
 import com.yk.mvpframe.R;
 import com.yk.mvpframe.activity.main.presenter.MainPresenter;
 import com.yk.mvpframe.activity.main.view.MainView;
 import com.yk.mvpframe.base.BaseActivity;
-import com.yk.mvpframe.fragment.TabFragment;
+import com.yk.mvpframe.base.BaseFragment;
+import com.yk.mvpframe.consts.Consts;
+import com.yk.mvpframe.fragment.EatFragment;
+import com.yk.mvpframe.fragment.HomeFragment;
+import com.yk.mvpframe.fragment.MineFragment;
+import com.yk.mvpframe.fragment.PlayFragment;
 import com.yk.mvpframe.widget.TabView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
+/**
+ * @FileName MainActivity
+ * @Author alan
+ * @Date 2019/7/20 11:03
+ * @Describe TODO
+ * @Mark
+ **/
 public class MainActivity extends BaseActivity<MainPresenter> implements MainView {
 
     @BindView(R.id.main_vp)
     ViewPager mainVp;
     @BindView(R.id.home_tab)
-    TabView homeBut;
+    TabView homeTab;
     @BindView(R.id.home_eat)
     TabView homeEat;
     @BindView(R.id.home_play)
@@ -39,11 +52,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     @BindView(R.id.home_mine)
     TabView homeMine;
 
+
     private List<String> title_ls = new ArrayList<>(Arrays.asList("主页", "吃喝", "玩乐", "我的"));
 
-    private SparseArray<TabFragment> mFragments = new SparseArray<>();
+    private SparseArray<BaseFragment> mFragments = new SparseArray<>();
 
     private List<TabView> mTabButs = new ArrayList<>();
+
+    private int mCurrentPosition=0;
 
     public static void startMainActivity(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -61,19 +77,38 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     }
 
     @Override
+    protected void initDataBeforeView(Bundle savedInstanceState) {
+        if(savedInstanceState!=null){
+            mCurrentPosition=savedInstanceState.getInt(Consts.BUNDLE_KEY_TAB_POSITION,0);
+        }
+    }
+
+    @Override
     protected void initView() {
-        mTabButs.add(homeBut);
+        mTabButs.add(homeTab);
         mTabButs.add(homeEat);
         mTabButs.add(homePlay);
         mTabButs.add(homeMine);
 
-        homeBut.setProgress(1);
+        setCurrentTab(mCurrentPosition);
 
         mainVp.setOffscreenPageLimit(title_ls.size());
+
         mainVp.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int i) {
-                return TabFragment.newInstance(title_ls.get(i));
+                if(0==i){
+                    return HomeFragment.newInstance(title_ls.get(i));
+                }
+                else if(1==i){
+                    return EatFragment.newInstance(title_ls.get(i));
+                }
+                else if(2==i){
+                    return PlayFragment.newInstance(title_ls.get(i));
+                }
+                else{
+                    return MineFragment.newInstance(title_ls.get(i));
+                }
             }
 
             @Override
@@ -84,7 +119,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
             @NonNull
             @Override
             public Object instantiateItem(@NonNull ViewGroup container, int position) {
-                TabFragment fragment = (TabFragment) super.instantiateItem(container, position);
+                BaseFragment fragment = (BaseFragment) super.instantiateItem(container, position);
                 mFragments.put(position, fragment);
                 return fragment;
             }
@@ -95,11 +130,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
                 super.destroyItem(container, position, object);
             }
         });
+    }
 
+    @Override
+    protected void setListener() {
         mainVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int i1) {
-                Logger.e("position:" + position + "***positionOffset:" + positionOffset);
+                Logger.i("position:" + position + "***positionOffset:" + positionOffset);
                 if (positionOffset > 0) {
                     TabView leftBut = mTabButs.get(position);
                     TabView rightBut = mTabButs.get(position + 1);
@@ -111,7 +149,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
 
             @Override
             public void onPageSelected(int position) {
-
+                mFragments.get(position).initImmersionBar();
             }
 
             @Override
@@ -120,20 +158,40 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
             }
         });
 
-       /* presenter.addDisposable(RxView.clicks(homeBut)
-                .throttleFirst(500, TimeUnit.MILLISECONDS)
-                .subscribe(o -> {
-                    TabFragment fragment=mFragments.get(0);
-                    if(fragment!=null){
-                        fragment.changeTitle("主页改变了");
-                    }
-        }));*/
+        for(int i=0;i<mTabButs.size();i++){
+            TabView tabView=mTabButs.get(i);
+            int finalI = i;
+            presenter.addDisposable(RxView.clicks(tabView)
+                    .throttleFirst(500, TimeUnit.MILLISECONDS)
+                    .subscribe(o -> {
+                        mainVp.setCurrentItem(finalI,false);
+                        setCurrentTab(finalI);
+                        mFragments.get(finalI).initImmersionBar();
+                    }));
+        }
+    }
+
+    private void setCurrentTab(int position) {
+        for(int i=0;i<mTabButs.size();i++){
+            TabView tabView=mTabButs.get(i);
+            if(i==position){
+                tabView.setProgress(1);
+            }
+            else {
+                tabView.setProgress(0);
+            }
+        }
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(Consts.BUNDLE_KEY_TAB_POSITION,mainVp.getCurrentItem());
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ImmersionBar.with(this).statusBarDarkFont(true).init();
     }
 }

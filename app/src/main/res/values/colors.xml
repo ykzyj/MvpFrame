@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#fdbf43</color>
+    <color name="colorPrimaryDark">#fc9302</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorGrey">#cccccc</color>
+    <color name="colorGreyE">#eeeeee</color>
+    <color name="colorGreyF7">#f7f7f7</color>
     <color name="colorBlack4F">#4F4F4F</color>
+    <color name="colorGreyEA">#eaeaea</color>
 
     <color name="loading_dialog_bg">#ffe6ebed</color>
     <color name="edit_default_color">#6E6E6E</color>
     <color name="edit_forbid_color">#CD2626</color>
-    <color name="tab_normal_grey">#ff8a8a8a</color>
+    <color name="tab_normal_grey">#ff515151</color>
+    <color name="tab_group_bg">#FFFAFA</color>
 
 </resources>

@@ -18,7 +18,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2px"
         android:background="@color/tab_normal_grey"
         />
 
@@ -26,8 +26,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="2dp"
+        android:background="@color/colorGreyF7"
         >
 
         <com.yk.mvpframe.widget.TabView
@@ -37,6 +38,7 @@
             android:layout_height="wrap_content"
             app:tab_normal_image="@mipmap/home_normal"
             app:tab_select_image="@mipmap/home_fill"
+            app:tab_middle_image="@mipmap/home_middle"
             app:tab_text="@string/app_tab_home"
             />
 
@@ -47,7 +49,8 @@
             android:layout_height="wrap_content"
             app:tab_normal_image="@mipmap/eat_normal"
             app:tab_select_image="@mipmap/eat_fill"
-            app:tab_text="@string/app_tab_home"
+            app:tab_middle_image="@mipmap/eat_middle"
+            app:tab_text="@string/app_tab_eat"
             />
 
         <com.yk.mvpframe.widget.TabView
@@ -57,6 +60,7 @@
             android:layout_height="wrap_content"
             app:tab_normal_image="@mipmap/play_normal"
             app:tab_select_image="@mipmap/play_fill"
+            app:tab_middle_image="@mipmap/play_middle"
             app:tab_text="@string/app_tab_play"
             />
 
@@ -67,6 +71,7 @@
             android:layout_height="wrap_content"
             app:tab_normal_image="@mipmap/mine_normal"
             app:tab_select_image="@mipmap/mine_fill"
+            app:tab_middle_image="@mipmap/mine_middle"
             app:tab_text="@string/app_tab_mine"
             />
 

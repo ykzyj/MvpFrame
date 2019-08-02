@@ -4,13 +4,20 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import com.gyf.immersionbar.ImmersionBar;
+import com.jakewharton.rxbinding3.view.RxView;
+import com.yk.mvpframe.R;
 import com.yk.mvpframe.tools.ActivityManager;
 import com.yk.mvpframe.util.ToastUtils;
 import com.yk.mvpframe.widget.LoadingDialog;
 import com.yk.mvpframe.widget.ProgressDialog;
-
+import java.util.concurrent.TimeUnit;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -22,6 +29,22 @@ import butterknife.Unbinder;
  * @Mark
  **/
 public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BaseView {
+    @Nullable
+    @BindView(R.id.back_img)
+    ImageView backImg;
+    @Nullable
+    @BindView(R.id.title_tv)
+    TextView titleTv;
+    @Nullable
+    @BindView(R.id.right_tv)
+    TextView rightTv;
+    @Nullable
+    @BindView(R.id.right_img)
+    ImageView rightImg;
+    @Nullable
+    @BindView(R.id.top_bar)
+    Toolbar toolbar;
+
     public Context context;
     private ProgressDialog mDialog;
     private LoadingDialog mLoadingDialog;
@@ -34,17 +57,66 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityManager.getInstance().pushActivity(this);
+        initDataBeforeView(savedInstanceState);
         context=this;
         setContentView(getLayoutId());
         presenter=createPresenter();
         unbinder= ButterKnife.bind(this);
+        initImmersionBar();
         initView();
         initData();
+        setListener();
+        initTopLeftBack();
     }
+
+    protected void initDataBeforeView(Bundle savedInstanceState){}
+
+    protected void setListener(){}
 
     protected void initData(){}
 
     protected void initView(){}
+
+    private void initTopLeftBack(){
+        if(backImg!=null){
+            presenter.addDisposable(RxView.clicks(backImg)
+                    .throttleFirst(500, TimeUnit.MILLISECONDS)
+                    .subscribe(o -> finish()));
+        }
+    }
+
+    protected void setHeader(String title){
+        if(titleTv!=null){
+            titleTv.setText(title);
+        }
+    }
+
+    public void setLeftBackVisible(int visible){
+        if(backImg!=null){
+            backImg.setVisibility(visible);
+        }
+    }
+
+    public void setRightTv(String title, View.OnClickListener onClickListener){
+        if(rightTv!=null){
+            rightTv.setVisibility(View.VISIBLE);
+            rightTv.setText(title);
+            rightTv.setOnClickListener(onClickListener);
+        }
+    }
+
+    public void setRightImg(int resId, View.OnClickListener onClickListener){
+        if(rightImg!=null){
+            rightImg.setVisibility(View.VISIBLE);
+            rightImg.setImageResource(resId);
+            rightImg.setOnClickListener(onClickListener);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
     @Override
     protected void onDestroy() {
@@ -143,5 +215,17 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         if (mDialog != null) {
             mDialog.setProgress(progress);
         }
+    }
+
+    /**
+     * 初始化沉浸式
+     * Init immersion bar.
+     */
+    protected void initImmersionBar() {
+        ImmersionBar.with(this).titleBar(toolbar).navigationBarColor(R.color.colorPrimary).init();
+    }
+
+    public Toolbar getToolbar() {
+        return toolbar;
     }
 }

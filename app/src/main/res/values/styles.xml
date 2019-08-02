@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -48,7 +48,30 @@
     <declare-styleable name="TabView">
         <attr name="tab_select_image" format="reference" />
         <attr name="tab_normal_image" format="reference" />
+        <attr name="tab_middle_image" format="reference" />
         <attr name="tab_text" format="string" />
     </declare-styleable>
+
+    <style name="mine_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:drawableRight">@mipmap/app_right_go</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:textColor">@color/colorBlack4F</item>
+    </style>
+
+    <style name="mine_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:background">@color/colorGrey</item>
+        <item name="android:layout_marginTop">8dp</item>
+    </style>
 
 </resources>

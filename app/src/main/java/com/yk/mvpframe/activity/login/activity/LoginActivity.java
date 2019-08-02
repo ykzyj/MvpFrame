@@ -1,5 +1,7 @@
 package com.yk.mvpframe.activity.login.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.widget.Button;
 import com.jakewharton.rxbinding3.view.RxView;
 import com.yk.mvpframe.R;
@@ -8,10 +10,10 @@ import com.yk.mvpframe.activity.login.view.LoginView;
 import com.yk.mvpframe.activity.main.activity.MainActivity;
 import com.yk.mvpframe.base.BaseActivity;
 import com.yk.mvpframe.widget.SuperEditText;
+
 import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
-import io.reactivex.functions.Consumer;
-import kotlin.Unit;
 
 /**
  * @FileName LoginActivity
@@ -29,6 +31,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     @BindView(R.id.login_btn)
     Button loginBtn;
 
+    public static void startLoginActivity(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
+    }
+
     @Override
     protected LoginPresenter createPresenter() {
         return new LoginPresenter(this);
@@ -39,6 +46,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         return R.layout.activity_login;
     }
 
+
     @Override
     public void onLoginSucc() {
         MainActivity.startMainActivity(LoginActivity.this);
@@ -46,8 +54,13 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     protected void initView() {
+        setHeader(getString(R.string.login_btn_txt));
+    }
+
+    @Override
+    protected void setListener() {
         presenter.addDisposable(RxView.clicks(loginBtn)
-                .throttleFirst(500,TimeUnit.MILLISECONDS)
-                .subscribe(o -> presenter.login(loginNameSet.getText(),loginPwSet.getText())));
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                .subscribe(o -> presenter.login(loginNameSet.getText(), loginPwSet.getText())));
     }
 }

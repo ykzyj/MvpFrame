@@ -11,6 +11,7 @@ public class Consts {
      * 静态变量
      */
     public static final String BUNDLE_KEY_TAB_TITLE="key_tab_title";
+    public static final String BUNDLE_KEY_TAB_POSITION="key_tab_position";
 
     /**
      * 服务器地址
