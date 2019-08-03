@@ -149,6 +149,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
 
             @Override
             public void onPageSelected(int position) {
+                mCurrentPosition=position;
                 mFragments.get(position).initImmersionBar();
             }
 
@@ -192,6 +193,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     @Override
     protected void onResume() {
         super.onResume();
-        ImmersionBar.with(this).statusBarDarkFont(true).init();
+        if(mCurrentPosition==0){
+            ImmersionBar.with(this).statusBarDarkFont(true).navigationBarDarkIcon(true).navigationBarColor(R.color.colorWhite).init();
+        }
+        else if(mCurrentPosition==3){
+            ImmersionBar.with(this).statusBarDarkFont(false).navigationBarDarkIcon(true)
+                    .navigationBarColor(R.color.colorWhite)
+                    .titleBar(getToolbar())
+                    .init();
+        }
     }
 }

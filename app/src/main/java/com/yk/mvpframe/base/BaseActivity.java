@@ -222,7 +222,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
      * Init immersion bar.
      */
     protected void initImmersionBar() {
-        ImmersionBar.with(this).titleBar(toolbar).navigationBarColor(R.color.colorPrimary).init();
+        ImmersionBar.with(this).titleBar(toolbar).navigationBarDarkIcon(true).navigationBarColor(R.color.colorWhite).init();
     }
 
     public Toolbar getToolbar() {

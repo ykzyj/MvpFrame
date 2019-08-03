@@ -32,6 +32,6 @@ public class EatFragment extends BaseFragment {
     @Override
     public void initImmersionBar() {
         super.initImmersionBar();
-        ImmersionBar.with(this).statusBarDarkFont(true).init();
+        ImmersionBar.with(this).statusBarDarkFont(true).navigationBarDarkIcon(true).navigationBarColor(R.color.colorWhite).init();
     }
 }

@@ -60,6 +60,9 @@ public class MineFragment extends BaseFragment {
     @Override
     public void initImmersionBar() {
         super.initImmersionBar();
-        ImmersionBar.with(this).statusBarDarkFont(false).init();
+        ImmersionBar.with(this).statusBarDarkFont(false).navigationBarDarkIcon(true)
+                .navigationBarColor(R.color.colorWhite)
+                .titleBar(getToolbar())
+                .init();
     }
 }
