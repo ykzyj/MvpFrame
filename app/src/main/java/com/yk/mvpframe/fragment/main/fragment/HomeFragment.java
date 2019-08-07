@@ -1,11 +1,16 @@
-package com.yk.mvpframe.fragment;
+package com.yk.mvpframe.fragment.main.fragment;
 
 import android.os.Bundle;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.yk.mvpframe.R;
 import com.yk.mvpframe.base.BaseFragment;
+import com.yk.mvpframe.base.BasePresenter;
 import com.yk.mvpframe.consts.Consts;
+import com.yk.mvpframe.fragment.main.presenter.EatPresenter;
+import com.yk.mvpframe.fragment.main.presenter.HomePresenter;
+import com.yk.mvpframe.fragment.main.view.EatView;
+import com.yk.mvpframe.fragment.main.view.HomeView;
 
 /**
  * @FileName TabFragment
@@ -14,19 +19,24 @@ import com.yk.mvpframe.consts.Consts;
  * @Describe TODO
  * @Mark
  **/
-public class PlayFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements HomeView {
 
-    public static PlayFragment newInstance(String title){
+    public static HomeFragment newInstance(String title){
         Bundle bundle=new Bundle();
         bundle.putString(Consts.BUNDLE_KEY_TAB_TITLE,title);
-        PlayFragment tabFragment=new PlayFragment();
+        HomeFragment tabFragment=new HomeFragment();
         tabFragment.setArguments(bundle);
         return tabFragment;
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_play;
+        return R.layout.fragment_home;
+    }
+
+    @Override
+    protected HomePresenter createPresenter() {
+        return new HomePresenter(this);
     }
 
     @Override

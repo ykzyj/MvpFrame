@@ -1,11 +1,14 @@
-package com.yk.mvpframe.fragment;
+package com.yk.mvpframe.fragment.main.fragment;
 
 import android.os.Bundle;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.yk.mvpframe.R;
 import com.yk.mvpframe.base.BaseFragment;
+import com.yk.mvpframe.base.BasePresenter;
 import com.yk.mvpframe.consts.Consts;
+import com.yk.mvpframe.fragment.main.presenter.EatPresenter;
+import com.yk.mvpframe.fragment.main.view.EatView;
 
 /**
  * @FileName TabFragment
@@ -14,7 +17,7 @@ import com.yk.mvpframe.consts.Consts;
  * @Describe TODO
  * @Mark
  **/
-public class EatFragment extends BaseFragment {
+public class EatFragment extends BaseFragment<EatPresenter> implements EatView {
 
     public static EatFragment newInstance(String title){
         Bundle bundle=new Bundle();
@@ -27,6 +30,11 @@ public class EatFragment extends BaseFragment {
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_eat;
+    }
+
+    @Override
+    protected EatPresenter createPresenter() {
+        return new EatPresenter(this);
     }
 
     @Override

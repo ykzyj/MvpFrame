@@ -54,7 +54,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:text="@string/login_btn_txt"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textColor="@color/colorWhite"
             android:background="@drawable/btn_common_selector"
             />

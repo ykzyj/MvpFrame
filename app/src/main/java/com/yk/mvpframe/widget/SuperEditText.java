@@ -202,7 +202,9 @@ public class SuperEditText extends RelativeLayout implements CompoundButton.OnCh
                     }
                 }
                 else {
-                    resetView();
+                    if(!TextUtils.isEmpty(mContentEt.getText().toString())){
+                        resetView();
+                    }
                 }
             }
         });
@@ -214,7 +216,7 @@ public class SuperEditText extends RelativeLayout implements CompoundButton.OnCh
     private void resetView() {
         if(mAnimateFlag&& TextUtils.isEmpty(mContentEt.getText().toString())){
             mTitleTv.animate().translationYBy(getHeight()/4)
-                    .translationX(ConvertUtils.dp2px(imageW))
+                    .translationX(ConvertUtils.dp2px(imageW/4))
                     .scaleX(1.0f).scaleY(1.0f)
                     .setDuration(200);
             mContentEt.setVisibility(INVISIBLE);
@@ -222,7 +224,7 @@ public class SuperEditText extends RelativeLayout implements CompoundButton.OnCh
             imm.hideSoftInputFromWindow(mContentEt.getWindowToken(), 0);
             mClearImg.setVisibility(View.INVISIBLE);
             mPwVisibleTb.setVisibility(View.INVISIBLE);
-            mTitleImg.setVisibility(View.INVISIBLE);
+            mTitleImg.setVisibility(View.GONE);
             setViewColor(mDefaultColor);
         }
     }
@@ -231,13 +233,13 @@ public class SuperEditText extends RelativeLayout implements CompoundButton.OnCh
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
         mHasFocusFlag=isChecked;
         if(isChecked){
-            mPwVisibleTb.setBackgroundResource(R.mipmap.frame_pw_hide);
-            mContentEt.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            mPwVisibleTb.setBackgroundResource(R.mipmap.frame_pw_show);
+            mContentEt.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             mContentEt.setSelection(mContentEt.getText().toString().length());
         }
         else {
-            mPwVisibleTb.setBackgroundResource(R.mipmap.frame_pw_show);
-            mContentEt.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            mPwVisibleTb.setBackgroundResource(R.mipmap.frame_pw_hide);
+            mContentEt.setTransformationMethod(PasswordTransformationMethod.getInstance());
             mContentEt.setSelection(mContentEt.getText().toString().length());
         }
     }

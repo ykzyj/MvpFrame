@@ -12,8 +12,6 @@ import com.yk.mvpframe.base.BasePresenter;
  **/
 public class MainPresenter extends BasePresenter<MainView> {
 
-    
-
     public MainPresenter(MainView baseView) {
         super(baseView);
     }

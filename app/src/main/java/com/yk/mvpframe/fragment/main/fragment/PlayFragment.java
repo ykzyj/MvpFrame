@@ -1,22 +1,14 @@
-package com.yk.mvpframe.fragment;
+package com.yk.mvpframe.fragment.main.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.yk.mvpframe.R;
 import com.yk.mvpframe.base.BaseFragment;
+import com.yk.mvpframe.base.BasePresenter;
 import com.yk.mvpframe.consts.Consts;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+import com.yk.mvpframe.fragment.main.presenter.PlayPresenter;
+import com.yk.mvpframe.fragment.main.view.PlayView;
 
 /**
  * @FileName TabFragment
@@ -25,19 +17,24 @@ import butterknife.Unbinder;
  * @Describe TODO
  * @Mark
  **/
-public class HomeFragment extends BaseFragment {
+public class PlayFragment extends BaseFragment implements PlayView {
 
-    public static HomeFragment newInstance(String title){
+    public static PlayFragment newInstance(String title){
         Bundle bundle=new Bundle();
         bundle.putString(Consts.BUNDLE_KEY_TAB_TITLE,title);
-        HomeFragment tabFragment=new HomeFragment();
+        PlayFragment tabFragment=new PlayFragment();
         tabFragment.setArguments(bundle);
         return tabFragment;
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_home;
+        return R.layout.fragment_play;
+    }
+
+    @Override
+    protected PlayPresenter createPresenter() {
+        return new PlayPresenter(this);
     }
 
     @Override

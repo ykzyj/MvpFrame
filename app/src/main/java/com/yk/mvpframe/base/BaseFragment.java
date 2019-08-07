@@ -14,8 +14,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.gyf.immersionbar.ImmersionBar;
+import com.jakewharton.rxbinding3.view.RxView;
 import com.yk.mvpframe.R;
 import com.yk.mvpframe.consts.Consts;
+import com.yk.mvpframe.util.ToastUtils;
+import com.yk.mvpframe.widget.LoadingDialog;
+import com.yk.mvpframe.widget.ProgressDialog;
+
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -27,7 +34,7 @@ import butterknife.Unbinder;
  * @Describe TODO
  * @Mark
  **/
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements BaseView {
     @Nullable
     @BindView(R.id.back_img)
     ImageView backImg;
@@ -48,6 +55,12 @@ public abstract class BaseFragment extends Fragment {
     private Unbinder unbinder;
     protected Activity mActivity;
     protected View mRootView;
+    private ProgressDialog mDialog;
+    private LoadingDialog mLoadingDialog;
+    protected T presenter;
+
+    protected abstract int getLayoutId();
+    protected abstract T createPresenter();
 
     @Override
     public void onAttach(Context context) {
@@ -83,10 +96,12 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this, view);
+        presenter=createPresenter();
         initData();
         initView();
         setListener();
         initHeader();
+        initTopLeftBack();
     }
 
     protected void initHeader() {
@@ -98,31 +113,30 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (unbinder != null) {
+        if(presenter!=null){
+            presenter.detachView();
+        }
+        if(unbinder!=null){
             unbinder.unbind();
         }
     }
 
-    protected abstract int getLayoutId();
-
     protected void initDataBeforeView(Bundle savedInstanceState) {
     }
 
-    protected void initData() {
-    }
+    protected void initView(){}
 
-    protected void initView() {
-        if (backImg != null) {
-            backImg.setVisibility(View.INVISIBLE);
-        }
+    protected void initData() {
     }
 
     protected void setListener() {
     }
 
-    private void initTopLeftBack(View.OnClickListener onClickListener) {
-        if (backImg != null) {
-            backImg.setOnClickListener(onClickListener);
+    private void initTopLeftBack(){
+        if(backImg!=null){
+            presenter.addDisposable(RxView.clicks(backImg)
+                    .throttleFirst(500, TimeUnit.MILLISECONDS)
+                    .subscribe(o -> mActivity.finish()));
         }
     }
 
@@ -138,19 +152,90 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    public void setRightTv(String title, View.OnClickListener onClickListener) {
-        if (rightTv != null) {
-            rightTv.setVisibility(View.VISIBLE);
-            rightTv.setText(title);
-            rightTv.setOnClickListener(onClickListener);
+    @Override
+    public void showToast(String s) {
+        ToastUtils.show(s);
+    }
+
+    @Override
+    public void showToast(int resId) {
+        ToastUtils.show(resId);
+    }
+
+    public void showFileDialog() {
+        if(mDialog==null){
+            mDialog = new ProgressDialog(mActivity);
+            mDialog.setCanceledOnTouchOutside(false);
+        }
+        else {
+            mDialog.setProgress(0);
+        }
+        mDialog.show();
+    }
+
+    public void hideFileDialog() {
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
         }
     }
 
-    public void setRightImg(int resId, View.OnClickListener onClickListener) {
-        if (rightImg != null) {
-            rightImg.setVisibility(View.VISIBLE);
-            rightImg.setImageResource(resId);
-            rightImg.setOnClickListener(onClickListener);
+
+    private void closeLoadingDialog() {
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
+            mLoadingDialog.dismiss();
+        }
+    }
+
+    private void showLoadingDialog(String loadingTxt) {
+        if (mLoadingDialog == null) {
+            mLoadingDialog = new LoadingDialog(mActivity);
+        }
+        if(!TextUtils.isEmpty(loadingTxt)){
+            mLoadingDialog.setLoadingTxt(loadingTxt);
+        }
+        mLoadingDialog.setCancelable(false);
+        mLoadingDialog.show();
+    }
+
+    @Override
+    public void showLoading() {
+        showLoadingDialog("");
+    }
+
+    @Override
+    public void showLoading(String loadingTxt) {
+        showLoadingDialog(loadingTxt);
+    }
+
+    @Override
+    public void hideLoading() {
+        closeLoadingDialog();
+    }
+
+
+    @Override
+    public void showError(String msg) {
+        showToast(msg);
+    }
+
+    @Override
+    public void onErrorCode(BaseModel model) {
+    }
+
+    @Override
+    public void showLoadingFileDialog() {
+        showFileDialog();
+    }
+
+    @Override
+    public void hideLoadingFileDialog() {
+        hideFileDialog();
+    }
+
+    @Override
+    public void onProgress(int progress) {
+        if (mDialog != null) {
+            mDialog.setProgress(progress);
         }
     }
 

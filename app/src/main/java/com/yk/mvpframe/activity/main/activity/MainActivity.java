@@ -19,10 +19,10 @@ import com.yk.mvpframe.activity.main.view.MainView;
 import com.yk.mvpframe.base.BaseActivity;
 import com.yk.mvpframe.base.BaseFragment;
 import com.yk.mvpframe.consts.Consts;
-import com.yk.mvpframe.fragment.EatFragment;
-import com.yk.mvpframe.fragment.HomeFragment;
-import com.yk.mvpframe.fragment.MineFragment;
-import com.yk.mvpframe.fragment.PlayFragment;
+import com.yk.mvpframe.fragment.main.fragment.EatFragment;
+import com.yk.mvpframe.fragment.main.fragment.HomeFragment;
+import com.yk.mvpframe.fragment.main.fragment.MineFragment;
+import com.yk.mvpframe.fragment.main.fragment.PlayFragment;
 import com.yk.mvpframe.widget.TabView;
 
 import java.util.ArrayList;
@@ -150,7 +150,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
             @Override
             public void onPageSelected(int position) {
                 mCurrentPosition=position;
-                mFragments.get(position).initImmersionBar();
+                if(mFragments!=null&&mFragments.get(position)!=null){
+                    mFragments.get(position).initImmersionBar();
+                }
             }
 
             @Override

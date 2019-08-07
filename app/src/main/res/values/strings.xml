@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">拔草</string>
+    <string name="app_name">嗨报</string>
     <string name="log_name">MvpFrame</string>
 
     <string name="login_name_hint">请输入用户名</string>
@@ -22,10 +22,14 @@
     <string name="login_name_or_pw_input">请输入用户名和密码</string>
 
     <string name="app_mine_message">我的消息</string>
-    <string name="app_mine_group">拔草足迹</string>
+    <string name="app_mine_group">拔草历程</string>
     <string name="app_mine_collection">我的收藏</string>
     <string name="app_mine_trip">行程计划</string>
     <string name="app_mine_setting">系统设置</string>
     <string name="app_mine_opinion">意见反馈</string>
     <string name="app_mine_about">关于我们</string>
+
+    <string name="app_mine_user_level">用户功勋</string>
+    <string name="app_mine_user_vip">会员活动</string>
+    <string name="app_mine_alert_msg">新活动筹备中，敬请期待吧。</string>
 </resources>

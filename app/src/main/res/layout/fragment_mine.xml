@@ -10,8 +10,8 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:background="@color/colorPrimary"
+        android:layout_height="200dp"
+        android:background="@drawable/shape_mine_header"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintVertical_chainStyle="spread"
@@ -21,15 +21,14 @@
             android:id="@+id/user_logo_cv"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_gravity="center"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             card_view:cardCornerRadius="40dp"
             app:cardElevation="10dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="70dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="35dp"
             >
 
             <ImageView
@@ -45,14 +44,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="点击登录"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textColor="@color/colorWhite"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="80dp"
             app:layout_constraintLeft_toRightOf="@+id/user_logo_cv"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="35dp"
             />
 
         <TextView
@@ -70,8 +68,8 @@
 
         <ImageView
             android:id="@+id/user_edit_img"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@mipmap/app_edit"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/user_title_tv"
@@ -82,20 +80,177 @@
 
     </android.support.constraint.ConstraintLayout>
 
+    <android.support.v7.widget.CardView
+        android:id="@+id/user_habit_cv"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        card_view:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="165dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        >
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/top_user_cl"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintVertical_weight="1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                card_view:layout_constraintBottom_toTopOf="@+id/bottom_divider_view"
+                >
+
+                <ImageView
+                    android:id="@+id/user_level_img"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@mipmap/app_user_level"
+                    app:layout_constraintTop_toTopOf="@+id/user_level_tv"
+                    app:layout_constraintBottom_toBottomOf="@+id/user_level_tv"
+                    card_view:layout_constraintRight_toLeftOf="@+id/user_level_tv"
+                    android:layout_marginRight="10dp"
+                    />
+
+                <TextView
+                    android:id="@+id/user_level_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toTopOf="@+id/top_divider_view"
+                    card_view:layout_constraintRight_toLeftOf="@+id/top_divider_view"
+                    android:layout_marginRight="25dp"
+                    android:text="@string/app_mine_user_level"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="@color/edit_default_color"
+                    />
+
+                <View
+                    android:id="@+id/top_divider_view"
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@color/colorGrey"
+                    />
+
+                <ImageView
+                    android:id="@+id/user_vip_img"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@mipmap/app_user_vip"
+                    app:layout_constraintTop_toTopOf="@+id/top_divider_view"
+                    app:layout_constraintBottom_toBottomOf="@+id/top_divider_view"
+                    card_view:layout_constraintLeft_toRightOf="@+id/top_divider_view"
+                    android:layout_marginLeft="25dp"
+                    />
+
+                <TextView
+                    android:id="@+id/user_vip_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    card_view:layout_constraintLeft_toRightOf="@+id/user_vip_img"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/app_mine_user_vip"
+                    android:drawablePadding="10dp"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="@color/edit_default_color"
+                    />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <View
+                android:id="@+id/bottom_divider_view"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                card_view:layout_constraintBottom_toTopOf="@+id/user_alert_cl"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/colorGrey"
+                />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/user_alert_cl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                card_view:layout_constraintLeft_toLeftOf="parent"
+                card_view:layout_constraintRight_toRightOf="parent"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                >
+
+                <ImageView
+                    android:id="@+id/user_alert_img"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@mipmap/app_msg_alert"
+                    android:layout_marginLeft="20dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/user_alert_tv"
+                    app:layout_constraintBottom_toBottomOf="@+id/user_alert_tv"
+                    />
+
+                <TextView
+                    android:id="@+id/user_alert_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    card_view:layout_constraintLeft_toRightOf="@+id/user_alert_img"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/app_mine_alert_msg"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:textColor="@color/edit_default_color"
+                    android:padding="10dp"
+                    />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.v7.widget.CardView>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintVertical_weight="1"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/user_habit_cv"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="10dp"
         >
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/app_message"
+                app:layout_constraintTop_toTopOf="@+id/user_message_tv"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="20dp"
+                />
 
             <TextView
                 android:id="@+id/user_message_tv"
@@ -104,7 +259,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:text="@string/app_mine_message"
-                android:drawableLeft="@mipmap/app_message"
                 />
 
             <View
@@ -115,6 +269,15 @@
                 app:layout_constraintRight_toRightOf="parent"
                 />
 
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/app_collection"
+                app:layout_constraintTop_toTopOf="@+id/user_collection_tv"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="20dp"
+                />
+
             <TextView
                 android:id="@+id/user_collection_tv"
                 style="@style/mine_text"
@@ -122,7 +285,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:text="@string/app_mine_collection"
-                android:drawableLeft="@mipmap/app_collection"
                 />
 
             <View
@@ -138,6 +300,15 @@
                 android:background="@color/colorGreyE"
                 />
 
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/app_foot"
+                app:layout_constraintTop_toTopOf="@+id/user_group_tv"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="20dp"
+                />
+
             <TextView
                 android:id="@+id/user_group_tv"
                 style="@style/mine_text"
@@ -145,7 +316,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:text="@string/app_mine_group"
-                android:drawableLeft="@mipmap/app_foot"
                 />
 
             <View
@@ -156,6 +326,15 @@
                 app:layout_constraintRight_toRightOf="parent"
                 />
 
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/app_trip"
+                app:layout_constraintTop_toTopOf="@+id/user_trip_tv"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="20dp"
+                />
+
             <TextView
                 android:id="@+id/user_trip_tv"
                 style="@style/mine_text"
@@ -163,7 +342,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:text="@string/app_mine_trip"
-                android:drawableLeft="@mipmap/app_trip"
                 />
 
             <View
@@ -179,6 +357,15 @@
                 android:background="@color/colorGreyE"
                 />
 
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/app_setting"
+                app:layout_constraintTop_toTopOf="@+id/user_setting_tv"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="20dp"
+                />
+
             <TextView
                 android:id="@+id/user_setting_tv"
                 style="@style/mine_text"
@@ -186,7 +373,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:text="@string/app_mine_setting"
-                android:drawableLeft="@mipmap/app_setting"
                 />
 
             <View
@@ -197,6 +383,15 @@
                 app:layout_constraintRight_toRightOf="parent"
                 />
 
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/app_opinion"
+                app:layout_constraintTop_toTopOf="@+id/user_opinion_tv"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="20dp"
+                />
+
             <TextView
                 android:id="@+id/user_opinion_tv"
                 style="@style/mine_text"
@@ -204,7 +399,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:text="@string/app_mine_opinion"
-                android:drawableLeft="@mipmap/app_opinion"
                 />
 
             <View
@@ -215,6 +409,15 @@
                 app:layout_constraintRight_toRightOf="parent"
                 />
 
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@mipmap/app_about"
+                app:layout_constraintTop_toTopOf="@+id/user_about_tv"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="20dp"
+                />
+
             <TextView
                 android:id="@+id/user_about_tv"
                 style="@style/mine_text"
@@ -222,7 +425,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:text="@string/app_mine_about"
-                android:drawableLeft="@mipmap/app_about"
                 />
 
             <View

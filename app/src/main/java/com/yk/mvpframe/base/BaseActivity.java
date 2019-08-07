@@ -53,6 +53,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     protected abstract T createPresenter();
     protected abstract int getLayoutId();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,22 +95,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     public void setLeftBackVisible(int visible){
         if(backImg!=null){
             backImg.setVisibility(visible);
-        }
-    }
-
-    public void setRightTv(String title, View.OnClickListener onClickListener){
-        if(rightTv!=null){
-            rightTv.setVisibility(View.VISIBLE);
-            rightTv.setText(title);
-            rightTv.setOnClickListener(onClickListener);
-        }
-    }
-
-    public void setRightImg(int resId, View.OnClickListener onClickListener){
-        if(rightImg!=null){
-            rightImg.setVisibility(View.VISIBLE);
-            rightImg.setImageResource(resId);
-            rightImg.setOnClickListener(onClickListener);
         }
     }
 
