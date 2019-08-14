@@ -5,16 +5,13 @@ import android.support.v7.widget.CardView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.gyf.immersionbar.ImmersionBar;
-import com.jakewharton.rxbinding3.view.RxView;
 import com.yk.mvpframe.R;
 import com.yk.mvpframe.activity.login.activity.LoginActivity;
+import com.yk.mvpframe.activity.mine.activity.SystemSettingActivity;
 import com.yk.mvpframe.base.BaseFragment;
 import com.yk.mvpframe.consts.Consts;
 import com.yk.mvpframe.fragment.main.presenter.MinePresenter;
 import com.yk.mvpframe.fragment.main.view.MineView;
-
-import java.util.concurrent.TimeUnit;
-
 import butterknife.BindView;
 
 /**
@@ -32,6 +29,34 @@ public class MineFragment extends BaseFragment implements MineView {
     TextView userTitleTv;
     @BindView(R.id.user_edit_img)
     ImageView userEditImg;
+    @BindView(R.id.user_title_des_tv)
+    TextView userTitleDesTv;
+    @BindView(R.id.user_level_img)
+    ImageView userLevelImg;
+    @BindView(R.id.user_level_tv)
+    TextView userLevelTv;
+    @BindView(R.id.user_vip_img)
+    ImageView userVipImg;
+    @BindView(R.id.user_vip_tv)
+    TextView userVipTv;
+    @BindView(R.id.user_alert_img)
+    ImageView userAlertImg;
+    @BindView(R.id.user_alert_tv)
+    TextView userAlertTv;
+    @BindView(R.id.user_message_tv)
+    TextView userMessageTv;
+    @BindView(R.id.user_collection_tv)
+    TextView userCollectionTv;
+    @BindView(R.id.user_group_tv)
+    TextView userGroupTv;
+    @BindView(R.id.user_trip_tv)
+    TextView userTripTv;
+    @BindView(R.id.user_setting_tv)
+    TextView userSettingTv;
+    @BindView(R.id.user_opinion_tv)
+    TextView userOpinionTv;
+    @BindView(R.id.user_about_tv)
+    TextView userAboutTv;
 
     public static MineFragment newInstance(String title) {
         Bundle bundle = new Bundle();
@@ -53,9 +78,8 @@ public class MineFragment extends BaseFragment implements MineView {
 
     @Override
     protected void setListener() {
-        presenter.addDisposable(RxView.clicks(userTitleTv)
-                .throttleFirst(500, TimeUnit.MILLISECONDS)
-                .subscribe(o -> LoginActivity.startLoginActivity(getActivity())));
+        presenter.addViewClick(userTitleTv, o -> LoginActivity.startLoginActivity(getActivity()));
+        presenter.addViewClick(userSettingTv, o -> SystemSettingActivity.startLoginActivity(getActivity()));
     }
 
     @Override

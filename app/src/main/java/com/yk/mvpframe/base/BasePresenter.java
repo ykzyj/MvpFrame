@@ -1,13 +1,19 @@
 package com.yk.mvpframe.base;
 
+import android.view.View;
+
+import com.jakewharton.rxbinding3.view.RxView;
 import com.yk.mvpframe.api.ApiRepository;
 import com.yk.mvpframe.api.ApiRetrofit;
 import com.yk.mvpframe.api.ApiServer;
+
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -63,6 +69,12 @@ public class BasePresenter <V extends BaseView> {
         if(mNetCompositeDisposable!=null){
             mNetCompositeDisposable.dispose();
         }
+    }
+
+    public void addViewClick(View view, Consumer consumer){
+        addDisposable(RxView.clicks(view)
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                .subscribe(consumer));
     }
 
     /**

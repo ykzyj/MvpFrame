@@ -32,4 +32,10 @@
     <string name="app_mine_user_level">用户功勋</string>
     <string name="app_mine_user_vip">会员活动</string>
     <string name="app_mine_alert_msg">新活动筹备中，敬请期待吧。</string>
+
+    <string name="system_setting_update">版本更新</string>
+    <string name="system_setting_clear">垃圾清理</string>
+    <string name="system_setting_night">夜间模式</string>
+    <string name="system_setting_out_login">退出</string>
+    <string name="system_setting_out_login_msg">您确定退出当前登录账号吗？</string>
 </resources>

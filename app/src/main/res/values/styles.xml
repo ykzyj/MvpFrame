@@ -74,4 +74,26 @@
         <item name="android:layout_marginTop">15dp</item>
     </style>
 
+    <style name="system_setting_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/colorGreyEA</item>
+        <item name="android:layout_marginTop">14dp</item>
+        <item name="android:layout_marginRight">18dp</item>
+        <item name="android:layout_marginLeft">18dp</item>
+    </style>
+
+    <style name="system_setting_tv" parent="mine_text">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">18dp</item>
+        <item name="android:layout_marginRight">18dp</item>
+        <item name="android:layout_marginTop">14dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">15dp</item>
+        <item name="android:drawableRight">@mipmap/app_right_go</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/tab_normal_grey</item>
+    </style>
+
 </resources>

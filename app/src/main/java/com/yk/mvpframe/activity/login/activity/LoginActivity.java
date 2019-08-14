@@ -59,8 +59,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     protected void setListener() {
-        presenter.addDisposable(RxView.clicks(loginBtn)
-                .throttleFirst(500, TimeUnit.MILLISECONDS)
-                .subscribe(o -> presenter.login(loginNameSet.getText(), loginPwSet.getText())));
+        presenter.addViewClick(loginBtn, o -> presenter.login(loginNameSet.getText(), loginPwSet.getText()));
     }
 }

@@ -61,7 +61,7 @@
             <Button
                 android:id="@+id/ok_btn"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="45dp"
                 android:layout_weight="1"
                 android:text="@string/app_ok"
                 android:background="@drawable/btn_dialog_ok_selector"
@@ -76,7 +76,7 @@
             <Button
                 android:id="@+id/cancel_btn"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="45dp"
                 android:layout_weight="1"
                 android:text="@string/app_cancel"
                 android:background="@drawable/btn_dialog_cancel_selector"
