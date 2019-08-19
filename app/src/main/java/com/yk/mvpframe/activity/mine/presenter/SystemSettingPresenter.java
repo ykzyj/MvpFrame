@@ -3,6 +3,9 @@ package com.yk.mvpframe.activity.mine.presenter;
 import com.blankj.utilcode.util.AppUtils;
 import com.yk.mvpframe.activity.mine.view.SystemSettingView;
 import com.yk.mvpframe.base.BasePresenter;
+import com.yk.mvpframe.event.LoginEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * @FileName SystemSettingPresenter
@@ -23,4 +26,9 @@ public class SystemSettingPresenter extends BasePresenter<SystemSettingView> {
         baseView.showAppCurrentVersionName("V"+currentVersionName);
         baseView.showAppNewVersionName("V1.0.1");
     }
+
+    public void loginOut(){
+        EventBus.getDefault().post(new LoginEvent(LoginEvent.LOGINOUT));
+    }
+
 }

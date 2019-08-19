@@ -3,9 +3,9 @@
     <item android:state_pressed="true">
         <shape xmlns:android="http://schemas.android.com/apk/res/android"
             android:shape="rectangle">
-            <solid android:color="@color/colorGrey"/>
+            <solid android:color="@color/colorGreyE"/>
             <corners android:radius="5dp"/>
-            <stroke android:width="1dp" android:color="@color/colorGrey" />
+            <stroke android:width="1dp" android:color="@color/colorGreyE" />
         </shape>
     </item>
     <item android:state_enabled="true">
@@ -19,9 +19,9 @@
     <item android:state_enabled="false">
         <shape xmlns:android="http://schemas.android.com/apk/res/android"
             android:shape="rectangle">
-            <solid android:color="@color/colorGrey"/>
+            <solid android:color="@color/colorGreyE"/>
             <corners android:radius="5dp"/>
-            <stroke android:width="1dp" android:color="@color/colorGrey" />
+            <stroke android:width="1dp" android:color="@color/colorGreyE" />
         </shape>
     </item>
 </selector>

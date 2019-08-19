@@ -77,6 +77,8 @@ public class SystemSettingActivity extends BaseActivity<SystemSettingPresenter> 
                     public void onOkClick() {
                         if(outDialog!=null){
                             outDialog.dismiss();
+                            presenter.loginOut();
+                            finish();
                         }
                     }
                 });

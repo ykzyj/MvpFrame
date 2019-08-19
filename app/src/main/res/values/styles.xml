@@ -10,6 +10,7 @@
 
     <!--自定义Dialog背景全透明无边框theme-->
     <style name="CustomDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/animBottom</item>
         <!-- 边框 -->
         <item name="android:windowFrame">@null</item>
         <!-- 是否浮现在activity之上 -->
@@ -25,6 +26,11 @@
         <item name="android:backgroundDimEnabled">true</item>
         <!-- 遮罩层 -->
         <item name="android:backgroundDimAmount">0.5</item>
+    </style>
+
+    <style name="animBottom" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_out</item>
     </style>
 
     <declare-styleable name="HorizontalProgressBarWithNumber">

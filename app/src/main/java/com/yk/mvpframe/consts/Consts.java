@@ -16,9 +16,10 @@ public class Consts {
     /**
      * 服务器地址
      */
-    public static final String AUTHENTICATION_ONLINE_HTTPS = "https://robot.andedu.net:9003/";
-    public static String LOGIN_AUTHENTICATION = AUTHENTICATION_ONLINE_HTTPS+"robsso/";
-    public static String ROB_AUTHENTICATION = AUTHENTICATION_ONLINE_HTTPS+"robmanager/";
+    public static final String AGREEMENT_HTTPS = "https://";
+    public static final String AUTHENTICATION_ONLINE = "robot.andedu.net:9003/";
+    public static final String LOGIN_AUTHENTICATION = "robsso/";
+    public static final String ROB_AUTHENTICATION = "robmanager/";
 
     /**
      * 登录接口
@@ -27,9 +28,13 @@ public class Consts {
     /**
      * token登录接口
      */
-    public static final String tokenLogin = "/app/user/tokenLogin";
+    public static final String TokenLogin = "app/user/tokenLogin";
     /**
      * 短信登录接口
      */
-    public static final String MsgLogin = "/app/user/vCodeLogin";
+    public static final String MsgLogin = "app/user/vCodeLogin";
+    /**
+     * 获取用户头像
+     */
+    public static final String UserHead="app/appUser/downLoadAppUserPhoto";
 }

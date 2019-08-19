@@ -1,18 +1,31 @@
 package com.yk.mvpframe.fragment.main.fragment;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.yk.mvpframe.R;
 import com.yk.mvpframe.activity.login.activity.LoginActivity;
 import com.yk.mvpframe.activity.mine.activity.SystemSettingActivity;
 import com.yk.mvpframe.base.BaseFragment;
 import com.yk.mvpframe.consts.Consts;
+import com.yk.mvpframe.event.LoginEvent;
 import com.yk.mvpframe.fragment.main.presenter.MinePresenter;
 import com.yk.mvpframe.fragment.main.view.MineView;
+import com.yk.mvpframe.util.CacheUtils;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.BindView;
+import butterknife.Unbinder;
 
 /**
  * @FileName TabFragment
@@ -21,7 +34,7 @@ import butterknife.BindView;
  * @Describe TODO
  * @Mark
  **/
-public class MineFragment extends BaseFragment implements MineView {
+public class MineFragment extends BaseFragment<MinePresenter> implements MineView {
 
     @BindView(R.id.user_logo_cv)
     CardView userLogoCv;
@@ -57,6 +70,9 @@ public class MineFragment extends BaseFragment implements MineView {
     TextView userOpinionTv;
     @BindView(R.id.user_about_tv)
     TextView userAboutTv;
+    @BindView(R.id.user_logo_img)
+    ImageView userLogoImg;
+    Unbinder unbinder;
 
     public static MineFragment newInstance(String title) {
         Bundle bundle = new Bundle();
@@ -88,5 +104,29 @@ public class MineFragment extends BaseFragment implements MineView {
         ImmersionBar.with(this).statusBarDarkFont(false).navigationBarDarkIcon(true)
                 .navigationBarColor(R.color.colorWhite)
                 .init();
+    }
+
+    @Override
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLoginEvent(LoginEvent event) {
+        if (event.getLoginFlag() == LoginEvent.LOGIN) {
+            userTitleTv.setText(CacheUtils.getUserInfoModel().getAppUser().getNickName());
+            userTitleDesTv.setText(CacheUtils.getUserInfoModel().getAppUser().getPhone());
+            presenter.getUserImg();
+            /*Glide.with(this)
+                    .load(Consts.ROB_AUTHENTICATION + "/app/appUser/downLoadAppUserPhoto" )
+                    .placeholder(R.mipmap.user_head_default)
+                    .into(userLogoImg);*/
+        } else {
+            userTitleTv.setText(getString(R.string.app_mine_login_click));
+            userTitleDesTv.setText(getString(R.string.app_mine_login_des));
+            CacheUtils.setToken("");
+            CacheUtils.setUserInfoModel(null);
+        }
+    }
+
+    @Override
+    public void showUserImg(Bitmap bitmap) {
+        userLogoImg.setImageBitmap(bitmap);
     }
 }

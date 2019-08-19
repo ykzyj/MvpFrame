@@ -57,11 +57,13 @@ public class ApiRetrofit {
                 CacheUtils.setToken(token);
                 SPUtils spUtils=SPUtils.getInstance();
                 spUtils.put("token",token);
+                Logger.e("token:" + token);
             }
             long endTime = System.currentTimeMillis();
             long duration = endTime - startTime;
             MediaType mediaType = response.body().contentType();
-            String content = response.body().string();
+            //**不能设置为别的类型，否则转换可能出错**//
+            byte[] content = response.body().bytes();
             Logger.e("----------Request Start----------------");
             Logger.e("| " + request.toString() + request.headers().toString());
             Logger.e("| Response:" + content);
@@ -81,7 +83,7 @@ public class ApiRetrofit {
                 .readTimeout(10, TimeUnit.SECONDS)
                 .build();
 
-        httpUrlHelper=new HttpUrlHelper(HttpUrl.get(Consts.LOGIN_AUTHENTICATION));
+        httpUrlHelper=new HttpUrlHelper(HttpUrl.get(Consts.AGREEMENT_HTTPS+Consts.AUTHENTICATION_ONLINE));
         retrofit = new Retrofit.Builder()
                 .baseUrl(httpUrlHelper.getHttpUrl())
                 .addConverterFactory(BaseConverterFactory.create())

@@ -3,11 +3,15 @@ package com.yk.mvpframe.activity.login.presenter;
 import android.text.TextUtils;
 import com.yk.mvpframe.R;
 import com.yk.mvpframe.activity.login.view.LoginView;
+import com.yk.mvpframe.consts.Consts;
+import com.yk.mvpframe.event.LoginEvent;
 import com.yk.mvpframe.util.AsciiUtils;
 import com.yk.mvpframe.base.BaseObserver;
 import com.yk.mvpframe.base.BasePresenter;
 import com.yk.mvpframe.model.UserInfoModel;
 import com.yk.mvpframe.util.CacheUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * @FileName LoginPresenter
@@ -33,6 +37,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                     public void onSuccess(Object o) {
                         if(o!=null&&o instanceof UserInfoModel){
                             CacheUtils.setUserInfoModel((UserInfoModel)o);
+                            EventBus.getDefault().post(new LoginEvent(LoginEvent.LOGIN));
                             baseView.onLoginSucc();
                         }
                     }

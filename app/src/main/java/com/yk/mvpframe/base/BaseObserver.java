@@ -38,7 +38,7 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
     @Override
     protected void onStart() {
         if(view!=null&&isShowDialog){
-            view.showLoading();
+            showDialog();
         }
     }
 
@@ -50,7 +50,7 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
     @Override
     public void onError(Throwable e) {
         if(view!=null&&isShowDialog){
-            view.hideLoading();
+            hideDialog();
         }
         BaseException exception=null;
 
@@ -102,8 +102,16 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
     @Override
     public void onComplete() {
         if(view!=null&&isShowDialog){
-            view.hideLoading();
+            hideDialog();
         }
+    }
+
+    public void hideDialog(){
+        view.hideLoading();
+    }
+
+    public void showDialog(){
+        view.showLoading();
     }
 
     public abstract void onSuccess(T t);

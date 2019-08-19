@@ -1,5 +1,7 @@
 package com.yk.mvpframe.fragment.main.view;
 
+import android.graphics.Bitmap;
+
 import com.yk.mvpframe.base.BaseView;
 
 /**
@@ -10,4 +12,5 @@ import com.yk.mvpframe.base.BaseView;
  * @Mark
  **/
 public interface MineView extends BaseView {
+    void showUserImg(Bitmap bitmap);
 }

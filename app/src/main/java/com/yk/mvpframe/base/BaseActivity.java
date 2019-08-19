@@ -6,16 +6,22 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.gyf.immersionbar.ImmersionBar;
 import com.jakewharton.rxbinding3.view.RxView;
 import com.yk.mvpframe.R;
+import com.yk.mvpframe.event.LoginEvent;
 import com.yk.mvpframe.tools.ActivityManager;
+import com.yk.mvpframe.util.CacheUtils;
 import com.yk.mvpframe.util.ToastUtils;
 import com.yk.mvpframe.widget.LoadingDialog;
 import com.yk.mvpframe.widget.ProgressDialog;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,6 +69,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         setContentView(getLayoutId());
         presenter=createPresenter();
         unbinder= ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         initImmersionBar();
         initView();
         initData();
@@ -106,6 +113,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
         ActivityManager.getInstance().popActivity(this);
         if(presenter!=null){
             presenter.detachView();
@@ -212,5 +220,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     public Toolbar getToolbar() {
         return toolbar;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLoginEvent(LoginEvent event) {
     }
 }

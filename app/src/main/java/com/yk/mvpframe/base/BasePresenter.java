@@ -31,10 +31,12 @@ public class BasePresenter <V extends BaseView> {
 
     protected ApiServer apiServer;
     protected ApiRepository apiRepository;
+    protected ApiRetrofit apiRetrofit;
 
     public BasePresenter(V baseView){
         this.baseView=baseView;
-        apiServer= ApiRetrofit.getInstance().getApiService();
+        apiRetrofit=ApiRetrofit.getInstance();
+        apiServer= apiRetrofit.getApiService();
         apiRepository=new ApiRepository(apiServer);
     }
 

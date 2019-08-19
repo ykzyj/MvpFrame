@@ -5,6 +5,7 @@
     <string name="login_name_hint">请输入用户名</string>
     <string name="login_pwd_hint">请输入密码</string>
     <string name="login_btn_txt">登录</string>
+    <string name="login_success">登录成功</string>
     <string name="login_out_btn_txt">退出登录</string>
 
     <string name="app_download">下载</string>
@@ -21,6 +22,8 @@
 
     <string name="login_name_or_pw_input">请输入用户名和密码</string>
 
+    <string name="app_mine_login_click">点击登录</string>
+    <string name="app_mine_login_des">登录更精彩</string>
     <string name="app_mine_message">我的消息</string>
     <string name="app_mine_group">拔草历程</string>
     <string name="app_mine_collection">我的收藏</string>

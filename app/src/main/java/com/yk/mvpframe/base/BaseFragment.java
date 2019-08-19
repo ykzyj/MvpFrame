@@ -17,9 +17,14 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.jakewharton.rxbinding3.view.RxView;
 import com.yk.mvpframe.R;
 import com.yk.mvpframe.consts.Consts;
+import com.yk.mvpframe.event.LoginEvent;
 import com.yk.mvpframe.util.ToastUtils;
 import com.yk.mvpframe.widget.LoadingDialog;
 import com.yk.mvpframe.widget.ProgressDialog;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.concurrent.TimeUnit;
 
@@ -96,6 +101,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
         presenter=createPresenter();
         initData();
         initView();
@@ -113,12 +119,17 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
     @Override
     public void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
         if(presenter!=null){
             presenter.detachView();
         }
         if(unbinder!=null){
             unbinder.unbind();
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLoginEvent(LoginEvent event) {
     }
 
     protected void initDataBeforeView(Bundle savedInstanceState) {

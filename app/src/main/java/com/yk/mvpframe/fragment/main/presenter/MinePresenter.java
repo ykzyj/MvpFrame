@@ -1,7 +1,20 @@
 package com.yk.mvpframe.fragment.main.presenter;
 
+import android.graphics.Bitmap;
+import android.text.TextUtils;
+
+import com.yk.mvpframe.R;
+import com.yk.mvpframe.base.BaseObserver;
 import com.yk.mvpframe.base.BasePresenter;
+import com.yk.mvpframe.base.BitmapObserver;
+import com.yk.mvpframe.consts.Consts;
+import com.yk.mvpframe.event.LoginEvent;
 import com.yk.mvpframe.fragment.main.view.MineView;
+import com.yk.mvpframe.model.UserInfoModel;
+import com.yk.mvpframe.util.AsciiUtils;
+import com.yk.mvpframe.util.CacheUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * @FileName MinePresenter
@@ -13,5 +26,22 @@ import com.yk.mvpframe.fragment.main.view.MineView;
 public class MinePresenter extends BasePresenter<MineView> {
     public MinePresenter(MineView baseView) {
         super(baseView);
+    }
+
+    public void getUserImg() {
+        addDisposable(apiServer.getUserImg(CacheUtils.getUserInfoModel().getAppUser().getId()+"")
+                ,new BitmapObserver(baseView,false) {
+                    @Override
+                    public void onSuccess(Bitmap bitmap) {
+                        if(bitmap!=null){
+                            baseView.showUserImg(bitmap);
+                        }
+                    }
+                    @Override
+                    public void onError(String msg) {
+
+                    }
+                });
+
     }
 }

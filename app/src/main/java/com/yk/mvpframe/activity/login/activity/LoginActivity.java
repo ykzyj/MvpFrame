@@ -9,7 +9,10 @@ import com.yk.mvpframe.activity.login.presenter.LoginPresenter;
 import com.yk.mvpframe.activity.login.view.LoginView;
 import com.yk.mvpframe.activity.main.activity.MainActivity;
 import com.yk.mvpframe.base.BaseActivity;
+import com.yk.mvpframe.event.LoginEvent;
 import com.yk.mvpframe.widget.SuperEditText;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.concurrent.TimeUnit;
 
@@ -49,7 +52,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     public void onLoginSucc() {
-        MainActivity.startMainActivity(LoginActivity.this);
+        finish();
     }
 
     @Override
