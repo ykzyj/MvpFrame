@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.gyf.immersionbar.ImmersionBar;
@@ -13,7 +15,6 @@ import com.jakewharton.rxbinding3.view.RxView;
 import com.yk.mvpframe.R;
 import com.yk.mvpframe.event.LoginEvent;
 import com.yk.mvpframe.tools.ActivityManager;
-import com.yk.mvpframe.util.CacheUtils;
 import com.yk.mvpframe.util.ToastUtils;
 import com.yk.mvpframe.widget.LoadingDialog;
 import com.yk.mvpframe.widget.ProgressDialog;
@@ -56,6 +57,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     private LoadingDialog mLoadingDialog;
     protected T presenter;
     protected Unbinder unbinder;
+    protected boolean mKeyboardShowFlag;
 
     protected abstract T createPresenter();
     protected abstract int getLayoutId();
@@ -79,9 +81,11 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
 
     protected void initDataBeforeView(Bundle savedInstanceState){}
 
-    protected void setListener(){}
+    protected void setListener(){
+    }
 
-    protected void initData(){}
+    protected void initData(){
+    }
 
     protected void initView(){}
 
@@ -158,6 +162,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     }
 
     private void showLoadingDialog(String loadingTxt) {
+        hideKeyboard(this.getWindow().getDecorView());
         if (mLoadingDialog == null) {
             mLoadingDialog = new LoadingDialog(context);
         }
@@ -225,4 +230,22 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onLoginEvent(LoginEvent event) {
     }
+
+    public void hideKeyboard(View view){
+        InputMethodManager imm = (InputMethodManager) view.getContext()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
+    }
+
+    public void showKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) view.getContext()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            view.requestFocus();
+            imm.showSoftInput(view, 0);
+        }
+    }
+
 }

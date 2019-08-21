@@ -24,6 +24,8 @@
 
     <string name="app_mine_login_click">点击登录</string>
     <string name="app_mine_login_des">登录更精彩</string>
+    <string name="user_sign_in">用户签到</string>
+
     <string name="app_mine_message">我的消息</string>
     <string name="app_mine_group">拔草历程</string>
     <string name="app_mine_collection">我的收藏</string>

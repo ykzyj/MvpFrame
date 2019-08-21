@@ -30,18 +30,18 @@ public class MinePresenter extends BasePresenter<MineView> {
 
     public void getUserImg() {
         addDisposable(apiServer.getUserImg(CacheUtils.getUserInfoModel().getAppUser().getId()+"")
-                ,new BitmapObserver(baseView,false) {
+                ,new BaseObserver(baseView,false) {
                     @Override
-                    public void onSuccess(Bitmap bitmap) {
-                        if(bitmap!=null){
-                            baseView.showUserImg(bitmap);
+                    public void onSuccess(Object o) {
+                        if(o!=null){
+                            baseView.showUserImg((Bitmap) o);
                         }
                     }
+
                     @Override
                     public void onError(String msg) {
 
                     }
                 });
-
     }
 }

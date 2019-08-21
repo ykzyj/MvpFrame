@@ -48,56 +48,67 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
     }
 
     @Override
-    public void onError(Throwable e) {
+    public void onError(Throwable throwable) {
         if(view!=null&&isShowDialog){
             hideDialog();
         }
         BaseException exception=null;
-
-        if(e!=null){
-            if(e instanceof BaseException){
-                exception= (BaseException) e;
-                if(view!=null){
-                    view.onErrorCode(new BaseModel(exception.getErrorCode(),exception.getErrorMsg()));
+        if(throwable!=null){
+            exception=getExceptionType(throwable);
+            if(exception==null){
+                try {
+                    exception=getExceptionType(throwable.getCause().getCause());
                 }
-                else {
-                    onError(exception.getErrorMsg());
-                }
-            }
-            else {
-                if (e instanceof HttpException) {
-                    /**
-                     * HTTP错误
-                     */
-                    exception = new BaseException(BaseException.BAD_NETWORK_MSG, e, BaseException.BAD_NETWORK);
-                } else if (e instanceof ConnectException
-                        || e instanceof UnknownHostException) {
-                    /**
-                     * 连接错误
-                     */
-                    exception = new BaseException(BaseException.CONNECT_ERROR_MSG, e, BaseException.CONNECT_ERROR);
-                } else if (e instanceof InterruptedIOException) {
-                    /**
-                     * 连接超时
-                     */
-                    exception = new BaseException(BaseException.CONNECT_TIMEOUT_MSG, e, BaseException.CONNECT_TIMEOUT);
-                } else if (e instanceof JsonParseException
-                        || e instanceof JSONException
-                        || e instanceof ParseException) {
-                    /**
-                     * 解析错误
-                     */
-                    exception = new BaseException(BaseException.PARSE_ERROR_MSG, e, BaseException.PARSE_ERROR);
-                } else {
-                    exception = new BaseException(BaseException.OTHER_MSG, e, BaseException.OTHER);
+                catch (Exception e){
                 }
             }
         }
-        else {
-            exception = new BaseException(BaseException.OTHER_MSG, e, BaseException.OTHER);
+        if(exception==null){
+            exception = new BaseException(BaseException.OTHER_MSG, null, BaseException.OTHER);
         }
         onError(exception.getErrorMsg());
     }
+
+    protected BaseException getExceptionType(Throwable ex){
+        BaseException exception=null;
+        if(ex instanceof BaseException){
+            exception= (BaseException) ex;
+            if(view!=null){
+                view.onErrorCode(new BaseModel(exception.getErrorCode(),exception.getErrorMsg()));
+            }
+            else {
+                onError(exception.getErrorMsg());
+            }
+        }
+        else {
+            if (ex instanceof HttpException) {
+                /**
+                 * HTTP错误
+                 */
+                exception = new BaseException(BaseException.BAD_NETWORK_MSG, ex, BaseException.BAD_NETWORK);
+            } else if (ex instanceof ConnectException
+                    || ex instanceof UnknownHostException) {
+                /**
+                 * 连接错误
+                 */
+                exception = new BaseException(BaseException.CONNECT_ERROR_MSG, ex, BaseException.CONNECT_ERROR);
+            } else if (ex instanceof InterruptedIOException) {
+                /**
+                 * 连接超时
+                 */
+                exception = new BaseException(BaseException.CONNECT_TIMEOUT_MSG, ex, BaseException.CONNECT_TIMEOUT);
+            } else if (ex instanceof JsonParseException
+                    || ex instanceof JSONException
+                    || ex instanceof ParseException) {
+                /**
+                 * 解析错误
+                 */
+                exception = new BaseException(BaseException.PARSE_ERROR_MSG, ex, BaseException.PARSE_ERROR);
+            }
+        }
+        return exception;
+    }
+
 
     @Override
     public void onComplete() {

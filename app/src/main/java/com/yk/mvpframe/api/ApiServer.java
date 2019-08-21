@@ -1,5 +1,7 @@
 package com.yk.mvpframe.api;
 
+import android.graphics.Bitmap;
+
 import com.yk.mvpframe.consts.Consts;
 import com.yk.mvpframe.model.UserInfoModel;
 
@@ -27,5 +29,5 @@ public interface ApiServer {
     @Streaming
     @POST(Consts.ROB_AUTHENTICATION+Consts.UserHead)
     @FormUrlEncoded
-    Observable<ResponseBody> getUserImg(@Field("appUserId") String appUserId);
+    Observable<Bitmap> getUserImg(@Field("appUserId") String appUserId);
 }

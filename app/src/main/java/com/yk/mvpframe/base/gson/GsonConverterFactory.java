@@ -13,27 +13,27 @@ import retrofit2.Converter;
 import retrofit2.Retrofit;
 
 /**
- * @FileName BaseConverterFactory
+ * @FileName GsonConverterFactory
  * @Author alan
- * @Date 2019/7/11 9:36
+ * @Date 2019/8/19 15:25
  * @Describe TODO
  * @Mark
  **/
-public final class BaseConverterFactory extends Converter.Factory {
+public final class GsonConverterFactory extends Converter.Factory {
 
-    public static BaseConverterFactory create() {
+    public static GsonConverterFactory create() {
         return create(new Gson());
     }
 
     @SuppressWarnings("ConstantConditions")
-    public static BaseConverterFactory create(Gson gson) {
+    public static GsonConverterFactory create(Gson gson) {
         if (gson == null) throw new NullPointerException("gson == null");
-        return new BaseConverterFactory(gson);
+        return new GsonConverterFactory(gson);
     }
 
     private final Gson gson;
 
-    private BaseConverterFactory(Gson gson) {
+    private GsonConverterFactory(Gson gson) {
         this.gson = gson;
     }
 
@@ -41,13 +41,13 @@ public final class BaseConverterFactory extends Converter.Factory {
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations,
                                                             Retrofit retrofit) {
         TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
-        return new BaseResponseBodyConverter<>(gson, adapter);
+        return new GsonResponseBodyConverter<>(gson, adapter);
     }
 
     @Override
     public Converter<?, RequestBody> requestBodyConverter(Type type,
                                                           Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
         TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
-        return new BaseRequestBodyConverter<>(gson, adapter);
+        return new GsonRequestBodyConverter<>(gson, adapter);
     }
 }

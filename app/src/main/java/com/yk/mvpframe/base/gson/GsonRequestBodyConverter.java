@@ -15,13 +15,13 @@ import okio.Buffer;
 import retrofit2.Converter;
 
 /**
- * @FileName BaseRequestBodyConverter
+ * @FileName GsonRequestBodyConverter
  * @Author alan
- * @Date 2019/7/11 9:36
+ * @Date 2019/8/19 15:26
  * @Describe TODO
  * @Mark
  **/
-class BaseRequestBodyConverter<T> implements Converter<T, RequestBody> {
+class GsonRequestBodyConverter<T> implements Converter<T, RequestBody> {
 
     private static final MediaType MEDIA_TYPE = MediaType.parse("application/json; charset=UTF-8");
     private static final Charset UTF_8 = Charset.forName("UTF-8");
@@ -29,7 +29,7 @@ class BaseRequestBodyConverter<T> implements Converter<T, RequestBody> {
     private final Gson gson;
     private final TypeAdapter<T> adapter;
 
-    BaseRequestBodyConverter(Gson gson, TypeAdapter<T> adapter) {
+    GsonRequestBodyConverter(Gson gson, TypeAdapter<T> adapter) {
         this.gson = gson;
         this.adapter = adapter;
     }

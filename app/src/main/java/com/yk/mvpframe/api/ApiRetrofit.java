@@ -4,7 +4,8 @@ import android.text.TextUtils;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.orhanobut.logger.Logger;
-import com.yk.mvpframe.base.gson.BaseConverterFactory;
+import com.yk.mvpframe.base.gson.BitmapConverterFactory;
+import com.yk.mvpframe.base.gson.GsonConverterFactory;
 import com.yk.mvpframe.consts.Consts;
 import com.yk.mvpframe.helper.HttpUrlHelper;
 import com.yk.mvpframe.util.CacheUtils;
@@ -86,7 +87,8 @@ public class ApiRetrofit {
         httpUrlHelper=new HttpUrlHelper(HttpUrl.get(Consts.AGREEMENT_HTTPS+Consts.AUTHENTICATION_ONLINE));
         retrofit = new Retrofit.Builder()
                 .baseUrl(httpUrlHelper.getHttpUrl())
-                .addConverterFactory(BaseConverterFactory.create())
+                .addConverterFactory(BitmapConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 //支持RxJava2
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)

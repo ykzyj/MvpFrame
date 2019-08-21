@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.yk.mvpframe.R;
 import com.yk.mvpframe.activity.login.activity.LoginActivity;
@@ -25,10 +24,11 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * @FileName TabFragment
+ * @FileName MineFragment
  * @Author alan
  * @Date 2019/7/25 17:03
  * @Describe TODO
@@ -72,7 +72,12 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineVie
     TextView userAboutTv;
     @BindView(R.id.user_logo_img)
     ImageView userLogoImg;
-    Unbinder unbinder;
+    @BindView(R.id.user_sign_in_tv)
+    TextView userSignInTv;
+    @BindView(R.id.user_sign_in_right_img)
+    ImageView userSignInRightImg;
+    @BindView(R.id.user_qr_code_img)
+    ImageView userQrCodeImg;
 
     public static MineFragment newInstance(String title) {
         Bundle bundle = new Bundle();
@@ -113,15 +118,16 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineVie
             userTitleTv.setText(CacheUtils.getUserInfoModel().getAppUser().getNickName());
             userTitleDesTv.setText(CacheUtils.getUserInfoModel().getAppUser().getPhone());
             presenter.getUserImg();
-            /*Glide.with(this)
-                    .load(Consts.ROB_AUTHENTICATION + "/app/appUser/downLoadAppUserPhoto" )
-                    .placeholder(R.mipmap.user_head_default)
-                    .into(userLogoImg);*/
+            userEditImg.setVisibility(View.VISIBLE);
+            userQrCodeImg.setVisibility(View.VISIBLE);
         } else {
             userTitleTv.setText(getString(R.string.app_mine_login_click));
             userTitleDesTv.setText(getString(R.string.app_mine_login_des));
+            userLogoImg.setImageResource(R.mipmap.user_head_default);
             CacheUtils.setToken("");
             CacheUtils.setUserInfoModel(null);
+            userEditImg.setVisibility(View.INVISIBLE);
+            userQrCodeImg.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -129,4 +135,5 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineVie
     public void showUserImg(Bitmap bitmap) {
         userLogoImg.setImageBitmap(bitmap);
     }
+
 }
