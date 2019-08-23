@@ -18,6 +18,7 @@ import com.jakewharton.rxbinding3.view.RxView;
 import com.yk.mvpframe.R;
 import com.yk.mvpframe.consts.Consts;
 import com.yk.mvpframe.event.LoginEvent;
+import com.yk.mvpframe.event.PermissionGrantedListener;
 import com.yk.mvpframe.util.ToastUtils;
 import com.yk.mvpframe.widget.LoadingDialog;
 import com.yk.mvpframe.widget.ProgressDialog;
@@ -254,5 +255,19 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
         if(toolbar!=null){
             ImmersionBar.setTitleBar(this, toolbar);
         }
+    }
+
+    public void requestCommonPermissions(PermissionGrantedListener permissionGrantedListener, String... permissions) {
+        String strNames="";
+        for(String str:permissions){
+            str=str.replace(".","_");
+            int stringId=getResources().getIdentifier(str,"string","com.yk.mvpframe");
+            String name=getResources().getString(stringId);
+            if(!TextUtils.isEmpty(name)&&!strNames.contains(name)){
+                strNames=strNames+name+",";
+            }
+        }
+        strNames=strNames.substring(0,strNames.length()-1);
+        showToast(strNames);
     }
 }

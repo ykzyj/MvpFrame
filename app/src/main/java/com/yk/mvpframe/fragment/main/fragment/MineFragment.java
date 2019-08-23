@@ -1,5 +1,6 @@
 package com.yk.mvpframe.fragment.main.fragment;
 
+import android.Manifest;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -97,6 +98,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineVie
     protected void setListener() {
         presenter.addViewClick(userTitleTv, o -> LoginActivity.startLoginActivity(getActivity()));
         presenter.addViewClick(userSettingTv, o -> SystemSettingActivity.startLoginActivity(getActivity()));
+        presenter.addViewClick(userLogoImg, o -> requestCommonPermissions(null, Manifest.permission.CAMERA, Manifest.permission.CAMERA));
     }
 
     @Override

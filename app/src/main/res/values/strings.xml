@@ -43,4 +43,38 @@
     <string name="system_setting_night">夜间模式</string>
     <string name="system_setting_out_login">退出</string>
     <string name="system_setting_out_login_msg">您确定退出当前登录账号吗？</string>
+
+    <string name="android_permission_READ_CALENDAR">日历</string>
+    <string name="android_permission_WRITE_CALENDAR">日历</string>
+
+    <string name="android_permission_CAMERA">相机</string>
+
+    <string name="android_permission_READ_CONTACTS">联系人</string>
+    <string name="android_permission_WRITE_CONTACTS">联系人	</string>
+    <string name="android_permission_GET_CONTACTS">联系人</string>
+
+    <string name="android_permission_ACCESS_FINE_LOCATION">位置信息</string>
+    <string name="android_permission_ACCESS_COARSE_LOCATION">位置信息 </string>
+
+    <string name="android_permission_RECORD_AUDIO">麦克风</string>
+
+    <string name="android_permission_READ_PHONE_STATE">电话</string>
+    <string name="android_permission_CALL_PHONE">电话</string>
+    <string name="android_permission_READ_CALL_LOG">电话</string>
+    <string name="android_permission_WRITE_PHONE_STATE">电话</string>
+    <string name="android_permission_USE_SIP">电话</string>
+    <string name="android_permission_PROCESS_OUTGOING_CALLS">电话</string>
+    <string name="com_android_voicemail_permission_ADD_VOICEMAIL">电话</string>
+
+    <string name="android_permission_BODY_SENSORS">传感器</string>
+
+    <string name="android_permission_SEND_SMS">短信</string>
+    <string name="android_permission_RECEIVE_SMS">短信</string>
+    <string name="android_permission_READ_SMS">短信</string>
+    <string name="android_permission_RECEIVE_WAP_PUSH">短信</string>
+    <string name="android_permission_RECEIVE_MMS">短信</string>
+    <string name="android_permission_READ_CELL_BROADCASTS">短信</string>
+
+    <string name="android_permission_READ_EXTERNAL_STORAGE">存储空间</string>
+    <string name="android_permission_WRITE_EXTERNAL_STORAGE">存储空间</string>
 </resources>
