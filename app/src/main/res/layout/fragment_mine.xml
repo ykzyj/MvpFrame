@@ -83,13 +83,14 @@
 
         <ImageView
             android:id="@+id/user_sign_in_right_img"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:src="@mipmap/app_right_go_max"
             app:layout_constraintRight_toRightOf="@+id/user_sign_in_tv"
             app:layout_constraintBottom_toBottomOf="@+id/user_sign_in_tv"
             app:layout_constraintTop_toTopOf="@+id/user_sign_in_tv"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="2dp"
             />
 
         <ImageView

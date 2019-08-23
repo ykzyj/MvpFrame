@@ -33,6 +33,8 @@ public class BasePresenter <V extends BaseView> {
     protected ApiRepository apiRepository;
     protected ApiRetrofit apiRetrofit;
 
+    protected long windowDuration=1000;
+
     public BasePresenter(V baseView){
         this.baseView=baseView;
         apiRetrofit=ApiRetrofit.getInstance();
@@ -73,10 +75,18 @@ public class BasePresenter <V extends BaseView> {
         }
     }
 
-    public void addViewClick(View view, Consumer consumer){
+    public void addViewClick(View view,Consumer consumer){
         addDisposable(RxView.clicks(view)
-                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                .throttleFirst(windowDuration, TimeUnit.MILLISECONDS)
                 .subscribe(consumer));
+    }
+
+    public void addViewsClick(Consumer consumer, View... views){
+        for(View view:views){
+            addDisposable(RxView.clicks(view)
+                    .throttleFirst(windowDuration, TimeUnit.MILLISECONDS)
+                    .subscribe(consumer));
+        }
     }
 
     /**

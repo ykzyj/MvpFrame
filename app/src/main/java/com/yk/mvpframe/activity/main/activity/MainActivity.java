@@ -164,13 +164,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
         for(int i=0;i<mTabButs.size();i++){
             TabView tabView=mTabButs.get(i);
             int finalI = i;
-            presenter.addDisposable(RxView.clicks(tabView)
-                    .throttleFirst(500, TimeUnit.MILLISECONDS)
-                    .subscribe(o -> {
-                        mainVp.setCurrentItem(finalI,false);
-                        setCurrentTab(finalI);
-                        mFragments.get(finalI).initImmersionBar();
-                    }));
+            presenter.addViewClick(tabView,o -> {
+                mainVp.setCurrentItem(finalI,false);
+                setCurrentTab(finalI);
+                mFragments.get(finalI).initImmersionBar();
+            });
         }
     }
 

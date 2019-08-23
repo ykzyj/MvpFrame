@@ -248,9 +248,11 @@ public class SuperEditText extends RelativeLayout implements CompoundButton.OnCh
     public void onClick(View view) {
         if(view.getId()==mTitleTv.getId()){
             if(!mAnimateFlag){
+                mTitleTv.setAlpha(0);
                 mTitleTv.animate().translationYBy(-getHeight()/4)
                         .translationX(-ConvertUtils.dp2px(imageW))
                         .scaleX(0.85f).scaleY(0.85f)
+                        .alpha(1)
                         .setDuration(200);
                 mContentEt.setVisibility(VISIBLE);
                 mContentEt.requestFocus();

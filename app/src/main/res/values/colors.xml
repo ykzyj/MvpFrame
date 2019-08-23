@@ -10,6 +10,8 @@
     <color name="colorBlack4F">#4F4F4F</color>
     <color name="colorGreyEA">#eaeaea</color>
 
+    <color name="user_sign_bg_night">#FF6347</color>
+    <color name="user_sign_bg_deep">#fd4625</color>
     <color name="loading_dialog_bg">#ffe6ebed</color>
     <color name="edit_default_color">#6E6E6E</color>
     <color name="edit_forbid_color">#CD2626</color>
