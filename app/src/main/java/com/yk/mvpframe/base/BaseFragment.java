@@ -2,6 +2,9 @@ package com.yk.mvpframe.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,11 +18,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.gyf.immersionbar.ImmersionBar;
 import com.jakewharton.rxbinding3.view.RxView;
+import com.orhanobut.logger.Logger;
+import com.tbruyelle.rxpermissions2.Permission;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.yk.mvpframe.R;
 import com.yk.mvpframe.consts.Consts;
 import com.yk.mvpframe.event.LoginEvent;
 import com.yk.mvpframe.event.PermissionGrantedListener;
+import com.yk.mvpframe.util.PermissionsUtils;
 import com.yk.mvpframe.util.ToastUtils;
+import com.yk.mvpframe.widget.CustomDialog;
 import com.yk.mvpframe.widget.LoadingDialog;
 import com.yk.mvpframe.widget.ProgressDialog;
 
@@ -32,6 +40,7 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.functions.Consumer;
 
 /**
  * @FileName BaseFragment
@@ -258,16 +267,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
     }
 
     public void requestCommonPermissions(PermissionGrantedListener permissionGrantedListener, String... permissions) {
-        String strNames="";
-        for(String str:permissions){
-            str=str.replace(".","_");
-            int stringId=getResources().getIdentifier(str,"string","com.yk.mvpframe");
-            String name=getResources().getString(stringId);
-            if(!TextUtils.isEmpty(name)&&!strNames.contains(name)){
-                strNames=strNames+name+",";
-            }
-        }
-        strNames=strNames.substring(0,strNames.length()-1);
-        showToast(strNames);
+        PermissionsUtils.requestCommonPermissions(getActivity(),permissionGrantedListener,permissions);
     }
 }

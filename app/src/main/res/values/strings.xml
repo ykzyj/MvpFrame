@@ -44,6 +44,7 @@
     <string name="system_setting_out_login">退出</string>
     <string name="system_setting_out_login_msg">您确定退出当前登录账号吗？</string>
 
+    <!--权限对应字符串 start-->
     <string name="android_permission_READ_CALENDAR">日历</string>
     <string name="android_permission_WRITE_CALENDAR">日历</string>
 
@@ -77,4 +78,5 @@
 
     <string name="android_permission_READ_EXTERNAL_STORAGE">存储空间</string>
     <string name="android_permission_WRITE_EXTERNAL_STORAGE">存储空间</string>
+    <!--权限对应字符串 end-->
 </resources>

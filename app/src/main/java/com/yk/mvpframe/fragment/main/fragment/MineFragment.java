@@ -15,6 +15,7 @@ import com.yk.mvpframe.activity.mine.activity.SystemSettingActivity;
 import com.yk.mvpframe.base.BaseFragment;
 import com.yk.mvpframe.consts.Consts;
 import com.yk.mvpframe.event.LoginEvent;
+import com.yk.mvpframe.event.PermissionGrantedListener;
 import com.yk.mvpframe.fragment.main.presenter.MinePresenter;
 import com.yk.mvpframe.fragment.main.view.MineView;
 import com.yk.mvpframe.util.CacheUtils;
@@ -98,7 +99,12 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineVie
     protected void setListener() {
         presenter.addViewClick(userTitleTv, o -> LoginActivity.startLoginActivity(getActivity()));
         presenter.addViewClick(userSettingTv, o -> SystemSettingActivity.startLoginActivity(getActivity()));
-        presenter.addViewClick(userLogoImg, o -> requestCommonPermissions(null, Manifest.permission.CAMERA, Manifest.permission.CAMERA));
+        presenter.addViewClick(userLogoImg, o -> requestCommonPermissions(new PermissionGrantedListener() {
+            @Override
+            public void onPermissionGranted() {
+                showToast("权限授予成功！");
+            }
+        }, Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION));
     }
 
     @Override

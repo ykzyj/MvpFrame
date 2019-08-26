@@ -1,6 +1,5 @@
 package com.yk.mvpframe.base;
 
-import android.Manifest;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,13 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.gyf.immersionbar.ImmersionBar;
 import com.jakewharton.rxbinding3.view.RxView;
-import com.orhanobut.logger.Logger;
-import com.tbruyelle.rxpermissions2.Permission;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.yk.mvpframe.R;
 import com.yk.mvpframe.event.LoginEvent;
 import com.yk.mvpframe.event.PermissionGrantedListener;
 import com.yk.mvpframe.tools.ActivityManager;
+import com.yk.mvpframe.util.PermissionsUtils;
 import com.yk.mvpframe.util.ToastUtils;
 import com.yk.mvpframe.widget.LoadingDialog;
 import com.yk.mvpframe.widget.ProgressDialog;
@@ -32,7 +29,6 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import io.reactivex.functions.Consumer;
 
 /**
  * @FileName BaseActivity
@@ -63,7 +59,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     private LoadingDialog mLoadingDialog;
     protected T presenter;
     protected Unbinder unbinder;
-    protected boolean mKeyboardShowFlag;
 
     protected abstract T createPresenter();
     protected abstract int getLayoutId();
@@ -254,38 +249,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         }
     }
 
-    public void requestPermissions(PermissionGrantedListener permissionGrantedListener, String... permissions) {
-        String strNames="";
-        for(String str:permissions){
-            str=str.replace(".","_");
-            int stringId=getResources().getIdentifier(str,"string","com.yk.mvpframe");
-            String name=getResources().getString(stringId);
-            if(!TextUtils.isEmpty(name)&&!strNames.contains(name)){
-                strNames=strNames+name+",";
-            }
-        }
-        strNames=strNames.substring(0,strNames.length()-1);
-        showToast(strNames);
-        RxPermissions rxPermission = new RxPermissions(BaseActivity.this);
-        rxPermission.requestEach(permissions)
-                .subscribe(new Consumer<Permission>() {
-                    @Override
-                    public void accept(Permission permission) throws Exception {
-                        if (permission.granted) {
-                            // 用户已经同意该权限
-                            Logger.d(permission.name + " is granted.");
-                            permissionGrantedListener.onPermissionGranted();
-                        } else if (permission.shouldShowRequestPermissionRationale) {
-                            // 用户拒绝了该权限，没有选中『不再询问』（Never ask again）,那么下次再次启动时，还会提示请求权限的对话框
-                            Logger.d( permission.name + " is denied. More info should be provided.");
-
-                        } else {
-                            // 用户拒绝了该权限，并且选中『不再询问』
-                            Logger.d( permission.name + " is denied.");
-
-                        }
-                    }
-                });
+    public void requestCommonPermissions(PermissionGrantedListener permissionGrantedListener, String... permissions) {
+        PermissionsUtils.requestCommonPermissions(BaseActivity.this,permissionGrantedListener,permissions);
     }
 
 }
