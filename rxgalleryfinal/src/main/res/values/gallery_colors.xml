@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="gallery_color_head_light">#fdbf43</color>
+    <color name="gallery_color_head_dark">#fc9302</color>
+    <color name="gallery_colorWhite">#ffffff</color>
+
+</resources>

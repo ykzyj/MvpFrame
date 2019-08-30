@@ -24,6 +24,11 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
+import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
+import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
+import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
+import cn.finalteam.rxgalleryfinal.ui.base.IRadioImageCheckedListener;
+import cn.finalteam.rxgalleryfinal.utils.Logger;
 
 /**
  * @FileName MineFragment
@@ -102,9 +107,28 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineVie
         presenter.addViewClick(userLogoImg, o -> requestCommonPermissions(new PermissionGrantedListener() {
             @Override
             public void onPermissionGranted() {
-                showToast("权限授予成功！");
+                RxGalleryFinalApi.getInstance(mActivity).openGalleryRadioImgDefault(
+                        new RxBusResultDisposable<ImageRadioResultEvent>() {
+                            @Override
+                            protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) throws Exception {
+                                Logger.i("只要选择图片就会触发");
+                            }
+                        })
+                        .onCropImageResult(
+                                new IRadioImageCheckedListener() {
+                                    @Override
+                                    public void cropAfter(Object t) {
+                                        Logger.i("裁剪完成");
+                                    }
+
+                                    @Override
+                                    public boolean isActivityFinish() {
+                                        Logger.i("返回false不关闭，返回true则为关闭");
+                                        return true;
+                                    }
+                                });
             }
-        }, Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION));
+        }, Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE));
     }
 
     @Override
