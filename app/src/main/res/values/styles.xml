@@ -102,4 +102,8 @@
         <item name="android:textColor">@color/tab_normal_grey</item>
     </style>
 
+    <style name="LoginTabLayoutTextAppearance">
+        <item name="android:textSize">18sp</item>
+    </style>
+
 </resources>

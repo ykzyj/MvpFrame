@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.gyf.immersionbar.ImmersionBar;
 import com.yk.mvpframe.R;
 import com.yk.mvpframe.activity.login.activity.LoginActivity;
+import com.yk.mvpframe.activity.mine.activity.AboutOurActivity;
 import com.yk.mvpframe.activity.mine.activity.SystemSettingActivity;
 import com.yk.mvpframe.base.BaseFragment;
 import com.yk.mvpframe.consts.Consts;
@@ -103,7 +104,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineVie
     @Override
     protected void setListener() {
         presenter.addViewClick(userTitleTv, o -> LoginActivity.startLoginActivity(getActivity()));
-        presenter.addViewClick(userSettingTv, o -> SystemSettingActivity.startLoginActivity(getActivity()));
+        presenter.addViewClick(userSettingTv, o -> SystemSettingActivity.startSystemSettingActivity(getActivity()));
+        presenter.addViewClick(userAboutTv, o -> AboutOurActivity.startAboutOurActivity(getActivity()));
         presenter.addViewClick(userLogoImg, o -> requestCommonPermissions(new PermissionGrantedListener() {
             @Override
             public void onPermissionGranted() {

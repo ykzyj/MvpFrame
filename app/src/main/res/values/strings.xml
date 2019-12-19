@@ -2,11 +2,19 @@
     <string name="app_name">嗨报</string>
     <string name="log_name">MvpFrame</string>
 
-    <string name="login_name_hint">请输入用户名</string>
+    <string name="login_name_hint">请输入用户名/手机号</string>
     <string name="login_pwd_hint">请输入密码</string>
     <string name="login_btn_txt">登录</string>
     <string name="login_success">登录成功</string>
     <string name="login_out_btn_txt">退出登录</string>
+    <string name="login_other_txt">其他方式登录</string>
+    <string name="login_phone_hint">请输入手机号</string>
+    <string name="login_code_hint">请输入验证码</string>
+    <string name="login_code_get">获取验证码</string>
+
+    <string name="register_btn_txt">注册</string>
+
+    <string name="fg_pw_txt">忘记密码</string>
 
     <string name="app_download">下载</string>
     <string name="app_loading">加载中...</string>
@@ -31,7 +39,7 @@
     <string name="app_mine_collection">我的收藏</string>
     <string name="app_mine_trip">行程计划</string>
     <string name="app_mine_setting">系统设置</string>
-    <string name="app_mine_opinion">意见反馈</string>
+    <string name="app_mine_opinion">帮助与反馈</string>
     <string name="app_mine_about">关于我们</string>
 
     <string name="app_mine_user_level">用户功勋</string>
@@ -43,6 +51,11 @@
     <string name="system_setting_night">夜间模式</string>
     <string name="system_setting_out_login">退出</string>
     <string name="system_setting_out_login_msg">您确定退出当前登录账号吗？</string>
+
+    <string name="about_our_function">功能介绍</string>
+    <string name="about_our_contact">联系我们</string>
+    <string name="about_our_rights_en">All rights reserved</string>
+    <string name="about_our_rights_cn">个人版权所有 2019-2025</string>
 
     <!--权限对应字符串 start-->
     <string name="android_permission_READ_CALENDAR">日历</string>

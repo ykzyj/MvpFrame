@@ -43,7 +43,7 @@ public class SystemSettingActivity extends BaseActivity<SystemSettingPresenter> 
 
     CustomDialog outDialog;
 
-    public static void startLoginActivity(Context context) {
+    public static void startSystemSettingActivity(Context context) {
         Intent intent = new Intent(context, SystemSettingActivity.class);
         context.startActivity(intent);
     }
